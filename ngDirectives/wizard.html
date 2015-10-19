@@ -1,0 +1,30 @@
+<div class="wizard-container">
+    <div class="wizard-body">
+        <div class="wizard-bread">
+            <ul class="nav nav-pills">
+                <li ng-repeat="step in steps" class="wizard-steps">
+                    <div id="talkbubble" ng-class="{'active':step.hd.active=='active','no-active':step.hd.active=='no-active','visited':maxVisited>=step.hd.index}" ng-click="clickStep(step.hd.index)">
+                        <div class='title' ng-class="{'active':step.hd.active=='active'}">
+                            {{step.hd.index+1}}.{{step.hd.name}}</div>
+                    </div>
+                </li>
+            </ul>     
+        </div>
+        <div class="wizard-title">步骤{{selectedIndex+1}}:{{steps[selectedIndex].hdTitle}}
+        <button class="btn btn-link pull-right" ng-click="cancel()" ng-show="selectedItem.index==0" style=" font-weight: bold;padding-right: 20px">取消并退出</button>
+        </div>
+        <div class="wizard-step-wrap">
+            <div class="alert alert-danger" style="margin-top:10px" ng-show="showErrors">
+                <div ng-repeat="error in errors">{{error}}</div>
+            </div>
+            <div ng-transclude  class="wizard-group-wrap"></div>
+        </div>
+    </div>
+    <div class="wizard-footer" >
+        <button class="btn  btn-primary pull-right" ng-click="stepAction(selectedItem.index+1,'next')" ng-show="!lastStep&&selectedItem.index!=0">{{next}}</button>
+        <button class="btn  btn-primary pull-right" ng-click="stepAction(steps.length-1,'next')()" ng-show="!lastStep&&selectedItem.index!=0">审核和启动</button>
+        <button class="btn  btn-primary pull-right" ng-show="lastStep" ng-click="completeWizard()">{{end}}</button>
+        <button class="btn  btn-success pull-right" ng-click="stepAction(selectedItem.index-1,'previous')" ng-show="showPrev()">{{previous}}</button>
+        <button class="btn btn-link pull-right" ng-click="cancel()" ng-show="selectedItem.index!=0">取消</button>
+    </div>
+</div>

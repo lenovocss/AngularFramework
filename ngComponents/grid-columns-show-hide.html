@@ -1,0 +1,18 @@
+<div>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title">显示/隐藏列</h3>
+    </div>
+    <div class="modal-body">
+         <!-- <div>{{columns|json}}</div> -->
+         <div class="checkbox" ng-repeat="column in columns track by $index">
+		  <label>
+		    <input type="checkbox" ng-model="column.visible" value="" >
+		    {{column.displayName}}
+		  </label>
+		</div>
+    </div>
+    <div class="modal-footer">
+        <button class="ec-but" ng-click="cancel()">关闭</button>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+{
+  "name": "AngularFramework",
+  "version": "0.1",
+  "description": "lenovo css front-end angular framework",
+  "keywords": [
+    "angular"
+  ],
+  "homepage": "https://github.com/lenovocss/AngularFramework",
+  "author": {
+    "name": "bitjjj",
+    "email": "",
+    "url": "https://github.com/bitjjj"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lenovocss/AngularFramework.git"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "devDependencies": {
+  },
+  "scripts": {
+  },
+  "browser": "./**"
+}

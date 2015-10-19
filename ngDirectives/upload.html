@@ -1,0 +1,26 @@
+<div style="width:100%">
+	<style type="text/css">
+		.upload-layer{
+			width:100%;
+			height: 32px;
+			position: absolute;
+			background: #fff;
+			z-index: 99
+		}
+		.btn-custom{
+			height: 32px;
+		}
+		.upload-input{
+			width:20px;
+		}
+	</style>
+	 <div class="upload-layer">
+	    <a class="btn btn-default btn-custom">
+	        <span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;{{uploader.options.title}}
+	    </a>
+	</div>
+	<div>
+		<input class="upload-input" ng-if="uploader.options.multiple" type="file" nv-file-select="" uploader="uploader" multiple />
+	    <input class="upload-input" ng-if="!uploader.options.multiple" type="file" nv-file-select="" uploader="uploader" />
+	</div>
+</div>

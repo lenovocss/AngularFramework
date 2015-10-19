@@ -1,0 +1,126 @@
+
+.wizard-steps{
+    cursor: pointer;
+}
+
+.wizard-steps:first-child #talkbubble{
+   padding-left:5px;
+}
+
+#talkbubble {
+   position: relative;
+   padding: 0px 12px 3px 12px;
+   color: #146eb4;
+   margin-left:10px;
+   font-size: 12px;
+   border-bottom: 2px solid #ECECEC;
+}
+#talkbubble.visited:hover{
+  color: #FF9911;
+}
+#talkbubble.active { 
+   color: #666666;
+   border-bottom: 2px solid #FF9911;
+   font-weight: bold;
+}
+
+#talkbubble.success {
+   color: #146eb4;
+}
+
+
+
+/*
+
+*/
+
+.nav-counter {
+  padding: 2px 6px;
+  font-weight: normal;
+  color: white;
+  text-align: center;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+  background: #e23442;  
+  border-radius: 11px;
+  margin-right:5px;
+}
+
+.nav-counter.active {
+  background: #75a940;
+  border: 1px solid #1d6eb5;
+  background-image: -webkit-linear-gradient(top, #428bca, #66aeed);
+  background-image: -moz-linear-gradient(top, #d9d9d9, #ebebeb);
+  background-image: -o-linear-gradient(top, #d9d9d9, #ebebeb);
+  background-image: linear-gradient(top, #d9d9d9, #ebebeb);
+  color:#000;
+}
+
+.nav-counter.no-active {
+  background: #75a940;
+  border: 1px solid #bababa;
+  background-image: -webkit-linear-gradient(top, #d9d9d9, #ebebeb);
+  background-image: -moz-linear-gradient(top, #d9d9d9, #ebebeb);
+  background-image: -o-linear-gradient(top, #d9d9d9, #ebebeb);
+  background-image: linear-gradient(top, #d9d9d9, #ebebeb);
+  color:#000;
+}
+
+.nav-counter.success {
+  background : #75a940;
+  border: 1px solid #42582b;
+  background-image: -webkit-linear-gradient(top, #8ec15b, #689739);
+  background-image: -moz-linear-gradient(top, #8ec15b, #689739);
+  background-image: -o-linear-gradient(top, #8ec15b, #689739);
+  background-image: linear-gradient(to bottom, #8ec15b, #689739);
+}
+
+.wizard-wrap{
+ position: relative;
+}
+.wizard-container{
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+.wizard-body{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.wizard-title{
+  font-size: 24px;
+  color: #444;
+  z-index: 99;
+  position: relative;
+}
+.wizard-footer{
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  padding: 10px 0px;
+  bottom: 0;
+  border-top: 1px solid #ececec;
+}
+.wizard-group-wrap{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+.wizard-footer button{
+  margin-left: 10px;
+}
+.wizard-step-wrap{ 
+  height: 100%;
+  width: 100%;
+  margin-top: -108px;
+  padding-top: 108px;
+  position: absolute;
+  overflow: hidden;
+}
+.wizard-bread{
+  position: relative;
+  z-index: 999;
+}

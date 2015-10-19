@@ -1,0 +1,23 @@
+{
+  "name": "AngularFramework",
+  "description": "lenovo css front-end angular framework",
+  "keywords": [
+    "angularjs",
+    "angular"
+  ],
+  "ignore": [
+    "test",
+    "src",
+    "example",
+    ".travis.yml"
+  ],
+  "version": "0.1",
+  "main": "",
+  "license": "MIT",
+  "authors": [
+    { "name": "bitjjj" }
+  ],
+  "dependencies": {},
+  "devDependencies": {
+  }
+}
