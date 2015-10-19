@@ -133,6 +133,11 @@ define(["require","angular","directives/app-directives.module"], function(requir
 		   		 	if($scope.value || 
 		   		 		(!$scope.value && ($event.keyCode == 8 || $event.keyCode == 46))){//backspace or delete
 		   		 		temp[$scope['keyType']['key']]=$scope.value;
+				   		for(var key in temp){
+							if(temp[key]==''){
+								delete temp[key];
+							}
+						}
 		   		 		$scope.searchFun()(temp);
 		   		 	}
 		   		}
