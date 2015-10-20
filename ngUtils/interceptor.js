@@ -70,7 +70,8 @@ define(["require","angular"], function(require,ng) {
 	    var resourceInterceptor = {
 	        response: function(response) {
 	            
-	            if(response && response.data && typeof response.data == "object" && !response.data.success){
+				if(response &&  response.config.url.indexOf("login") == -1 
+					&& response.data && typeof response.data == "object" && !response.data.success){
 	            	//console.log("......response.....",response.data);
 	            	alert(response.data.resultMsg);
 	            	return $q.reject(response);
