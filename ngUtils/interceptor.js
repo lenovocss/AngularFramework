@@ -69,22 +69,19 @@ define(["require","angular"], function(require,ng) {
 	interceptor.factory('failureMsgInterceptor', ['$q','$location','errorService',function($q,$location,errorService) { 
 	    var resourceInterceptor = {
 	        response: function(response) {
-	            
-				if(response &&  response.config.url.indexOf("login") == -1 
+	            //console.log("......response.....",response.config.url,response.status);
+				if(typeof response.data == "undefined"){
+					alert("登陆超时，您需要重新登陆");
+	        		$location.path('/login');
+					return $q.reject(response);
+				}
+				else if(response &&  response.config.url.indexOf("login") == -1 
 					&& response.data && typeof response.data == "object" && !response.data.success){
-	            	//console.log("......response.....",response.data);
+	            	//console.log("......response failure.....",response.data);
 	            	alert(response.data.resultMsg);
 	            	return $q.reject(response);
 	            }
 	            return response; 
-	        },
-	        responseError: function(response) {
-	        	//console.log("response.....",response.status);
-	        	if(response.status == 302){
-	        		alert("登陆超时，您需要重新登陆");
-	        		$location.path('/login');
-	        	}
-	        	return $q.reject(response);
 	        }
 	    }; 
 	    return resourceInterceptor;
