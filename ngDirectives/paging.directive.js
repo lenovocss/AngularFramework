@@ -7,7 +7,6 @@ define(["require","angular","directives/app-directives.module"], function(requir
 		   	replace:true,
 		   	scope:{
 	 			pagingParam:"=",
-	 			searchParame:"=",
 	 			searchFilters:"=",
 	 			searchFun:"&",
 	 			navFun:"&",
@@ -16,16 +15,16 @@ define(["require","angular","directives/app-directives.module"], function(requir
 	 		templateUrl : cmpConfig.directivesPath+"paging.html",
 		   	controller:["$scope","$element",function($scope, $element){
 		   		var temp={};
-		   		$scope.pagingParam = $scope.pagingParam || {};
+		   		$scope.pagingParam = $scope.pagingParam || {itemsDeletionCount:-1};
 
 		   		$scope.pageCountList = PAGE_COUNT_LIST;
 		   		$scope.pagingParam.limit = PAGE_COUNT_LIST[0];
 
-                 console.log($scope.searchFilters);
+                 
 		   		 if($scope.searchFilters ){
-		   		 	console.log("searchfilters is not null");
+		   		 	//console.log("searchfilters is not null");
 		   		 }else{
-		   		 	console.log("searchfilters is null");
+		   		 	//console.log("searchfilters is null");
 			   		 $scope.searchFilters=[{
 			   		 	key:'tag_key',
 			   		 	value:'标签KEY ='
@@ -45,17 +44,26 @@ define(["require","angular","directives/app-directives.module"], function(requir
 		   		$scope.value="";
 		   		$scope.keyType=$scope.keyTypes[0]; 
 
-				var unwatch = $scope.$watch('pagingParam.itemsCount', function(newValue, oldValue, scope) {
+				var unwatchItemsCount = $scope.$watch('pagingParam.itemsCount', function(newValue, oldValue, scope) {
 					console.log("itemsCount:",newValue,oldValue);
 					
 					newValue = newValue * 1;
 					if(newValue > 0){
 						_computePages(newValue);
 						setPageNav();
-						oldValue && $scope.navFun()();;
+						oldValue && $scope.navFun()();
 						
+						$scope.pagingParam.itemsDeletionCount = -1;//reset deletion mark
 					}
-
+					
+				});
+				
+				var unwatchItemsDeletionCount = $scope.$watch('pagingParam.itemsDeletionCount', function(newValue, oldValue, scope) {
+					console.log("itemsDeletionCount:",newValue,oldValue);
+					
+					if(newValue > 0){
+						$scope.pagingParam.itemsCount -= newValue;
+					}
 					
 				});
 
@@ -112,8 +120,13 @@ define(["require","angular","directives/app-directives.module"], function(requir
 					if(itemsCount % $scope.pagingParam.limit.value != 0){
 						totalPages++;
 					}
-
-					$scope.pagingParam.currentPage = 1;
+					if($scope.pagingParam.itemsDeletionCount > 0){//deletion refresh
+						($scope.pagingParam.currentPage > totalPages) && ($scope.pagingParam.currentPage = totalPages);
+					}
+					else{//search refresh
+						$scope.pagingParam.currentPage = 1;
+					}
+					
 					$scope.pagingParam.totalPages = totalPages;
 					$scope.pageList = [];
 					for(var i=0;i<totalPages;i++){
@@ -143,7 +156,8 @@ define(["require","angular","directives/app-directives.module"], function(requir
 		   		}
 
 		   		$scope.$on("$destroy", function() {
-			        unwatch();
+			        unwatchItemsCount();
+					unwatchItemsDeletionCount();
 			    });
 		   	}],
 	   		link:function(scope,el,attrs){ 
