@@ -70,15 +70,16 @@ define(["require","angular"], function(require,ng) {
 	    var resourceInterceptor = {
 	        response: function(response) {
 	            //console.log("......response.....",response.config.url,response.status);
-				if(typeof response.data == "undefined"){
-					alert("登陆超时，您需要重新登陆");
-	        		$location.path('/login');
-					return $q.reject(response);
-				}
-				else if(response &&  response.config.url.indexOf("login") == -1 
+				if(response &&  response.config.url.indexOf("login") == -1 
 					&& response.data && typeof response.data == "object" && !response.data.success){
 	            	//console.log("......response failure.....",response.data);
-	            	alert(response.data.resultMsg);
+					if(response.data.resultCode == "00215"){
+						//alert("登陆超时，您需要重新登陆");
+						$location.path('/login');
+					}
+					else{
+						alert(response.data.resultMsg);
+					}
 	            	return $q.reject(response);
 	            }
 	            return response; 
