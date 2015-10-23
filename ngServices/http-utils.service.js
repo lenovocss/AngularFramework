@@ -12,6 +12,14 @@ define(['require','angular','services/app-utils.module'], function(require,ng,mo
 			function httpGet(url){
 				var deferred = $q.defer(),
 				dataPromise = deferred.promise;
+				if(url.indexOf('?') == -1){//prevent from cache
+					url+="?";
+				}
+				else{
+					(url[url.length-1] != '&') && (url+="&"); 
+				}
+				url+="dt="+Math.random();
+				
 				$http.get(url).success(function(data) { 
 					deferred.resolve(data);
 				}).error(function() {
