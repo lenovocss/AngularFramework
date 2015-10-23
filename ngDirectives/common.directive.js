@@ -371,7 +371,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 					function handleErrors(errors){
 						scope.titles = [];
 						for(var i=0;i<configJson.length;i++){
-							if(errors[configJson[i].type] && (scope.field.$invalid && !scope.field.$pristine ||!ngModel.$modelValue&& scope.form.submitted)){
+							if(checkTypes(errors,configJson[i]) && (scope.field.$invalid && !scope.field.$pristine ||!ngModel.$modelValue&& scope.form.$submitted)){
 								console.log("ngModel",scope.multiple,ngModel.$modelValue);	
 								if(scope.titles.length < 1){
 									scope.titles.push(configJson[i].tip);
@@ -383,6 +383,19 @@ define(["require","angular","directives/app-directives.module"], function(requir
 						}
 					}
 					
+					function checkTypes(errors,configJson){
+						var result = false;
+						if(configJson.type){
+							result = errors[configJson.type];
+						}
+						else if(configJson.types){
+							for(var i=0;i<configJson.types.length;i++){
+								result = result || errors[configJson.types[i]]
+							}
+						}
+						return result;
+					}
+					
 					var unwatchError = scope.$watchCollection('field.$error',function(newValue, oldValue, scope){
 						console.log("fieldError:",scope.field.$error,newValue,oldValue);
 						if(oldValue){
@@ -390,7 +403,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 						}
 					});
 					
-					unwatchSubmitted = scope.$watchCollection('form.submitted',function(newValue, oldValue, scope){
+					unwatchSubmitted = scope.$watchCollection('form.$submitted',function(newValue, oldValue, scope){
 						if(newValue){
 							handleErrors(scope.field.$error);
 						}
