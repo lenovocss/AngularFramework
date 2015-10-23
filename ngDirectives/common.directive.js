@@ -354,5 +354,54 @@ define(["require","angular","directives/app-directives.module"], function(requir
 					})*/
 				}
 			};
-		}]);
+		}]).directive('errorTip',['$window',function($window){
+		   	return {
+				template:"<div><p class='help-block' ng-show='titles.length >= 1' ng-repeat = 'title in titles'>{{title}}</p></div>",
+				replace: true,
+				require: 'ngModel',
+				scope:{
+					config: "@",
+					multiple: "@",
+					form:"=",
+					field:"="
+				},
+		   		link:function(scope,el,attrs,ngModel){
+		   			var configJson = JSON.parse(scope.config),oldFieldError;
+					
+					function handleErrors(errors){
+						scope.titles = [];
+						for(var i=0;i<configJson.length;i++){
+							if(errors[configJson[i].type] && (scope.field.$invalid && !scope.field.$pristine ||!ngModel.$modelValue&& scope.form.submitted)){
+								console.log("ngModel",scope.multiple,ngModel.$modelValue);	
+								if(scope.titles.length < 1){
+									scope.titles.push(configJson[i].tip);
+								}
+								else{
+									scope.multiple && scope.titles.push(configJson[i].tip);
+								}
+							}
+						}
+					}
+					
+					var unwatchError = scope.$watchCollection('field.$error',function(newValue, oldValue, scope){
+						console.log("fieldError:",scope.field.$error,newValue,oldValue);
+						if(oldValue){
+							handleErrors(newValue);
+						}
+					});
+					
+					unwatchSubmitted = scope.$watchCollection('form.submitted',function(newValue, oldValue, scope){
+						if(newValue){
+							handleErrors(scope.field.$error);
+						}
+					});
+					
+					scope.$on('$destroy',function(){
+						unwatchError();
+						unwatchSubmitted();
+					});
+					
+		   		}
+		   	}
+	   }]);
 });
