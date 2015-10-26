@@ -24,7 +24,10 @@ define(["require","angular"], function(require,ng) {
 				    _setActive(scope.menus,toState.name);
 				}); 
 				scope.expand=function(menu){
-					menu.expand=!menu.expand; 
+					menu.expand=!menu.expand;
+					if(menu.goto){
+						$state.go(menu.urlState);
+					}
 				}
 				_checkUrl=function(state,url){
 					return url.indexOf(state)!=-1 
