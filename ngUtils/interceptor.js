@@ -73,7 +73,11 @@ define(["require","angular"], function(require,ng) {
 				if(response &&  response.config.url.indexOf("login") == -1 
 					&& response.data && typeof response.data == "object" && !response.data.success){
 	            	//console.log("......response failure.....",response.data);
-					if(response.data.resultCode == "00215"){
+					if(response.data.resultCode == "02802"){
+						//alert("登陆超时，您需要重新登陆");
+						return response;
+					}
+					else if(response.data.resultCode == "00215"){
 						//alert("登陆超时，您需要重新登陆");
 						$location.path('/login');
 					}
