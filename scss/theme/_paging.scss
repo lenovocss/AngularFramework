@@ -1,0 +1,57 @@
+.grid-seach-bar{
+	.pager{
+		display: inline-block;
+		position: absolute;
+    	right: 10px;
+    	margin:0;
+	}
+	.grid-seach-select{
+		width: 200px;
+		display: inline-block;
+	}
+
+	.pager{
+		.previous{
+			span{
+				border-radius:0px;
+				border-top-left-radius: 15px;
+    			border-bottom-left-radius: 15px;
+    		}
+    		cursor: pointer;
+    		
+		}
+
+		.next{
+			span{
+				border-radius:0px;
+				border-top-right-radius: 15px;
+    			border-bottom-right-radius: 15px;
+    		}
+    		cursor: pointer;
+    		
+		}
+	}
+
+	.page-count-list{
+		display: inline-block;
+	    position: absolute;
+	    right: 180px;
+	    margin: 0;
+	}
+
+	.current-page-selector{
+		display: inline-block;
+	    position: absolute;
+	    right: 120px;
+	    margin: 0;
+	    margin-top: 8px;
+
+	    .dropdown-menu{
+	    	min-width: 100px;
+	    	width: 100px;
+	    	overflow-y:auto;
+	    	overflow-x:hidden;
+	    	max-height: 150px;  
+	    }
+	}
+}

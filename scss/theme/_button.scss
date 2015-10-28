@@ -1,0 +1,29 @@
+.ec-but{
+	border-radius: 5px;
+	padding: 5px 10px;
+	color: #fff;
+border: 1px solid #16b;
+background: #2378CD;
+background: -webkit-linear-gradient(top, #38d 0%, #16b);
+background: -moz-linear-gradient(top, #38d 0%, #16b);
+background: -ms-linear-gradient(top, #38d 0%, #16b);
+background: linear-gradient(top, #38d 0%, #16b);
+-webkit-box-shadow: 0 0 0 rgba(000, 000, 000, 0),inset 0 0 2px rgba(119, 170, 204, 1);
+-moz-box-shadow: 0 0 0 rgba(000, 000, 000, 0),inset 0 0 2px rgba(119, 170, 204, 1);
+-ms-box-shadow: 0 0 0 rgba(000, 000, 000, 0),inset 0 0 2px rgba(119, 170, 204, 1);
+box-shadow: 0 0 0 rgba(000, 000, 000, 0),inset 0 0 2px rgba(119, 170, 204, 1);
+text-shadow: 0 1px 0 rgba(025, 084, 167, 1),0 0 0 rgba(255, 255, 255, 0)
+}
+.ec-but:hover { 
+border: 1px solid #05a;
+background: #38d;
+background: -webkit-linear-gradient(top, #38d 0%, #05a);
+background: -moz-linear-gradient(top, #38d 0%, #05a);
+background: -ms-linear-gradient(top, #38d 0%, #05a);
+background: linear-gradient(top, #38d 0%, #05a);
+-webkit-box-shadow: 0 0 0 rgba(000, 000, 000, 0),inset 0 0 2px rgba(073, 151, 224, 1);
+-moz-box-shadow: 0 0 0 rgba(000, 000, 000, 0),inset 0 0 2px rgba(073, 151, 224, 1);
+-ms-box-shadow: 0 0 0 rgba(000, 000, 000, 0),inset 0 0 2px rgba(073, 151, 224, 1);
+box-shadow: 0 0 0 rgba(000, 000, 000, 0),inset 0 0 2px rgba(073, 151, 224, 1);
+text-shadow: 0 1px 0 rgba(000, 085, 170, 1),0 0 0 rgba(255, 255, 255, 0);
+}

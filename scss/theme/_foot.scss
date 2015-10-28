@@ -1,0 +1,97 @@
+@charset "UTF-8";
+ 
+.footer-wrap{ 
+  background-color: #fff;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  height: auto;
+  /*display: none;*/
+  .console-nav-footer{
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: linear-gradient(to bottom, #F5F5F5 0px, #F5F5F5 100%);
+    background-origin: padding-box;
+    background-position: 0 0;
+    background-repeat: repeat;
+    background-size: auto auto;
+    font-family: Helvetica Neue,Roboto,Arial,Droid Sans,sans-serif;
+    font-size: 12px;
+    height: 40px;
+    line-height: 40px;
+    padding-bottom: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 0;
+    position: relative;
+    text-align: left;
+    a{
+      min-width: 50px;
+      text-align: center;
+      text-decoration-color: -moz-use-text-color;
+      text-decoration-line: none;
+      text-decoration-style: solid;
+      outline: none;
+    }
+    .footer-content{
+      .feedback,.language-selector{
+        border-left-color: #222;
+        border-left-style: solid;
+        border-left-width: 1px;
+        border-right-color: #444;
+        border-right-style: solid;
+        border-right-width: 1px;
+        color: #eee;
+        float: left;
+        font-size: 14px;
+        font-weight: bold;
+        padding-bottom: 0;
+        padding-left: 0;
+        padding-right: 0.8em;
+        padding-top: 0;
+        .feedback-icon,.footer-icon{
+          background-position: -188px -91px;
+          background-image: url("../img/logo.png");
+          background-repeat: no-repeat;
+          height: 17px;
+          margin-bottom: 0;
+          margin-left: 8px;
+          margin-right: 8px;
+          margin-top: 0;
+          position: absolute;
+          top: 7px;
+          width: 17px;
+        }
+        .language-icon{
+           background-position: -205px -91px;
+        }
+        .feedback-lable,.language-lable{
+           padding-left: 35px;
+        } 
+      }
+      .terms-of-use,.privacy,.copyright-notice{
+        /*border-left-color: #222;
+        border-left-style: solid;
+        border-left-width: 1px;
+        border-right-color: #444;
+        border-right-style: solid;
+        border-right-width: 1px;*/
+        color: #999;
+        float: right;
+        font-size: 12px;
+        padding-bottom: 0;
+        padding-left: 1em;
+        padding-right: 1em;
+        padding-top: 0;
+      }
+      .copyright-notice{
+        border-left-color: -moz-use-text-color;
+        border-left-style: none;
+        border-left-width: 0;
+        color: #999;
+      }
+    }
+  }
+}
+

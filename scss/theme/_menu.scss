@@ -1,0 +1,115 @@
+@charset "UTF-8";
+.menu-wrap{
+	width: 196px;
+	/*background-color: #f4f8f9;*/
+	background-color: #ffffff;
+	.menu-body{
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		overflow: hidden;
+		/*right: 22px;*/
+		right:0px;
+		.menu-items-wrap{
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			overflow: hidden;
+			position: absolute;
+			.menu-items{
+				position: relative;
+				width: 100%;
+				height: 100%;
+				overflow: auto;
+				.menu-box{
+					width: 100%;
+					height: 100%;
+					padding-top:10px;
+					a{
+						text-decoration: none;
+						outline: none;
+						display:block;
+					} 
+					.menu-item{
+						color: #444;
+						display: block;
+						font-size: 14px;
+						line-height: 1.3em;
+						margin-bottom: 5px;
+						padding-left: 11px;
+    					margin-left: 20px;
+						padding-top:2px;
+						padding-bottom: 2px;
+						margin-top: 5px;
+						background-repeat: no-repeat;
+						background-position: 10px center;
+					}
+					.menu-item:hover{
+						color: #f91;
+						cursor: pointer;
+					}
+					.menu-title{
+						position: relative;
+						padding-left: 20px;
+					}
+					.activate{
+						border-left: 3px solid #f91;
+						font-weight: bold;
+						margin-left: 0px;
+						padding-left: 11px;
+    					margin-left: 20px;
+						/*background-color: #3e8ddd;*/
+						padding-top:2px;
+						padding-bottom: 2px;
+						margin-top: 5px;
+						margin-bottom: 5px;
+						/*color: white;*/
+					}
+					.node-image{
+						color:#999;
+						font-size: 12px;
+						cursor: pointer;
+						display: inline-block;
+						vertical-align: middle;
+						position: absolute;
+						top: 15px;
+    					/*right: 10px;*/
+					}
+					.node-label{
+						color: #999;
+						cursor: pointer;
+						display: inline-block;
+						font-size: 12px;
+						margin:13px 0 5px 15px;
+					}
+				}
+			}
+		}
+	}
+	.menu-side{
+		display: none;
+		position: absolute;
+		overflow: hidden;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		width:22px;
+		.right-border{
+			border-right: 1px solid #ddd;
+			border-left-style:none; 
+			position: absolute; 
+			left: 0px; 
+			top: 0px; 
+			right: 0px; 
+			bottom: 0px;
+			img{
+				cursor: pointer;
+				position: relative;
+				right: -1px;
+				top: 10px;
+			}
+		}
+	}
+}
