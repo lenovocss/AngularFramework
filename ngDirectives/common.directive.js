@@ -34,7 +34,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 	   			} 
 	   		}
 	    }])
-	   .directive('gridSide',['$window','$animate','domUtils',function($window,$animate,domUtils){
+	   .directive('gridSide',['$window','$animate','domUtils','funcUtils',function($window,$animate,domUtils,funcUtils){
 	   		return {
 	   			scope:{
 	   				topMappingSize:"@"
@@ -70,10 +70,13 @@ define(["require","angular","directives/app-directives.module"], function(requir
 		   				};
 		   				
 		   				hander();
-						window.onresize=function(){
+						window.onresize=funcUtils.debounce(function(){
 							gridHeight=el.height();
-							//el.find(".md-btn").trigger("click");
-						}
+							var detailWrapHeight = el.find(".grid-detaile-wrap").height();
+							if(gridHeight<=detailWrapHeight+50&&gridHeight>150){
+								el.find(".md-btn").trigger("click");
+							}
+						},50,{leading:false});
 	   				}else{
 	   					el.find(".grid-body-wrap").css("bottom","0");
 	   				}
