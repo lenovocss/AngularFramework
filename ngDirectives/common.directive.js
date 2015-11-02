@@ -319,19 +319,22 @@ define(["require","angular","directives/app-directives.module"], function(requir
 			return {
 				scope: {
 					title:"@",
+					innerHtml:"@",
 					openStatus:"="
 				}, 
 				replace: true,
 				link: function($scope, iElm, iAttrs, controller) {
+					var status = null;
+					$scope.openStatus?(status = 'down'):(status = 'right');
 					$(iElm).find(".panel-heading").css("cursor",'pointer');
-					$(iElm).find(".panel-title").html($scope.title+'<i class="pull-right glyphicon glyphicon-chevron-down"></i>');
+					$(iElm).find(".panel-title").html('<i class="pull-left fa fa-caret-'+status+'"></i>&nbsp;'+$scope.title+$scope.innerHtml);
 					$(iElm).find(".panel-heading").on('click',function(){
 						$scope.$apply(function(){
 							$scope.openStatus=!$scope.openStatus;
 							if($scope.openStatus){
-								$(iElm).find(".panel-title").html($scope.title+'<i class="pull-right glyphicon glyphicon-chevron-down"></i>');
+								$(iElm).find(".panel-title").html('<i class="pull-left fa fa-caret-down"></i>&nbsp;'+$scope.title+$scope.innerHtml);
 							}else{
-								$(iElm).find(".panel-title").html($scope.title+'<i class="pull-right glyphicon glyphicon-chevron-right"></i>');
+								$(iElm).find(".panel-title").html('<i class="pull-left fa fa-caret-right"></i>&nbsp;'+$scope.title+$scope.innerHtml);
 							}
 						})
 					})
