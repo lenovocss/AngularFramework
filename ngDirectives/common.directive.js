@@ -367,6 +367,39 @@ define(["require","angular","directives/app-directives.module"], function(requir
 					})*/
 				}
 			};
+		}]).directive('highchartResizer', ['$timeout', function($timeout){
+			//resize highchart size when chart in tabset
+			return {
+
+				require: '^tabset',
+				link: function($scope, ele, attrs, controller) {
+					
+					var oldSelect = controller.tabs[attrs.highchartResizer].onSelect;
+					
+					controller.tabs[attrs.highchartResizer].onSelect = function(){
+
+						if(!$scope.reflow){
+							var charts = $(ele).find(".highcharts-container");
+							$.each(charts,function(idx,ele){
+								$.each(Highcharts.charts,function(i,hc){
+									if(hc.container.id == ele.id){
+										(function(index){
+											$timeout(function(){
+												Highcharts.charts[index].reflow();
+											},0);
+										})(i);
+									}
+								});
+							});
+							
+							$scope.reflow = true;
+						}
+					
+						oldSelect && oldSelect();
+						
+					}	
+				}
+			};
 		}]).directive('errorTip',['$window',function($window){
 		   	return {
 				template:"<div><p class='help-block' ng-show='titles.length >= 1' ng-repeat = 'title in titles'>{{title}}</p></div>",
