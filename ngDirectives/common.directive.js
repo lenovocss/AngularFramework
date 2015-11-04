@@ -47,6 +47,25 @@ define(["require","angular","directives/app-directives.module"], function(requir
 	   				el.css("top",top);
 	   				el.css("position","absolute");
 	   				var gridHeight = el.height();
+	   				function set(){
+	   					var sizeMap = {
+	   						"min-btn": gridHeight/3,
+	   						"md-btn" : gridHeight/2,
+	   						"lg-btn" : gridHeight/3*2
+	   					};
+	   					var that = $(this);
+	   					if(that.hasClass("min-btn")){
+	   						setHeight(sizeMap["min-btn"]);
+	   					}else if(that.hasClass("md-btn")){
+	   						setHeight(sizeMap["md-btn"]);
+	   					}else if(that.hasClass("lg-btn")){
+	   						setHeight(sizeMap["lg-btn"])
+	   					}
+	   				}
+	   				function  setHeight(h){
+	   					el.find(".grid-detaile-wrap").height(h);
+	   					el.find(".grid-body-wrap").css("bottom",h+"px");
+	   				}
 	   				
 	   				if(el.find(".grid-detaile-wrap").length==1){
 
@@ -55,26 +74,6 @@ define(["require","angular","directives/app-directives.module"], function(requir
 		   				el.find(".min-btn").on('click',set);
 		   				el.find(".md-btn").on('click',set);
 		   				el.find(".lg-btn").on('click',set);
-
-		   				function set(){
-		   					var sizeMap = {
-		   						"min-btn": gridHeight/3,
-		   						"md-btn" : gridHeight/2,
-		   						"lg-btn" : gridHeight/3*2
-		   					};
-		   					var that = $(this);
-		   					if(that.hasClass("min-btn")){
-		   						setHeight(sizeMap["min-btn"]);
-		   					}else if(that.hasClass("md-btn")){
-		   						setHeight(sizeMap["md-btn"]);
-		   					}else if(that.hasClass("lg-btn")){
-		   						setHeight(sizeMap["lg-btn"])
-		   					}
-		   				}
-		   				function  setHeight(h){
-		   					el.find(".grid-detaile-wrap").height(h);
-		   					el.find(".grid-body-wrap").css("bottom",h+"px");
-		   				}
 
 						window.onresize=funcUtils.debounce(function(){
 							gridHeight=el.height();
