@@ -51,6 +51,7 @@ define(["require","angular"], function(require,ng) {
 	interceptor.factory('resourceInterceptor', ['$q','errorService','maskService',function($q,errorService,maskService) { 
 	    var resourceInterceptor = { 
 	        responseError: function(response) {
+	        	maskService.hideMask(response);
 	        	errorService.handleErrors(response);
 	        	return $q.reject(response);
 	        },
