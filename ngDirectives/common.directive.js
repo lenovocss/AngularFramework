@@ -462,5 +462,23 @@ define(["require","angular","directives/app-directives.module"], function(requir
 					
 		   		}
 		   	}
-	   }]);
+	   }]).directive('optimusPrime', ['$q','$timeout', function($q,$timeout){
+	    	return {
+	    		scope:{
+	    			data:"="
+	    		},
+	    		link: function($scope, iElm, iAttrs, controller) {
+	    			var height = $(iElm)[0].scrollHeight;
+	    			var pillarbar = $(iElm).find("#pillarbar");
+	    			/*var overplus = $(iElm).find("#overplus");
+	    			var used = $(iElm).find("#used");*/
+	    			var nowheight = parseInt(height*($scope.data.used/$scope.data.total));
+	    			$timeout(function(){
+	    				pillarbar.animate({
+					      height:nowheight
+					    });
+	    			},100);
+	    		}
+	    	};
+	    }]);
 });
