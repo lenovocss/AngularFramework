@@ -382,7 +382,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 							var charts = $(ele).find(".highcharts-container");
 							$.each(charts,function(idx,ele){
 								$.each(Highcharts.charts,function(i,hc){
-									if(hc.container.id == ele.id){
+									if(hc && hc.container.id == ele.id){
 										(function(index){
 											$timeout(function(){
 												Highcharts.charts[index].reflow();
@@ -449,7 +449,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 						}
 					});
 					
-					unwatchSubmitted = scope.$watchCollection('form.$submitted',function(newValue, oldValue, scope){
+					unwatchSubmitted = scope.$watch('form.$submitted',function(newValue, oldValue, scope){
 						if(newValue){
 							handleErrors(scope.field.$error);
 						}
