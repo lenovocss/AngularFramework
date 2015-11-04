@@ -12,7 +12,8 @@ define(["require", "angular", "directives/app-directives.module","css!directives
 				config : '=',
 				next : '@',
 				previous : '@',
-				end : '@'
+				end : '@',
+				top:'@'
 			},
 			controller : [
 				'$scope','$state',
@@ -176,6 +177,8 @@ define(["require", "angular", "directives/app-directives.module","css!directives
 						data : scope.onCompletedWizard()
 					});
 				}
+				console.log(scope.top);
+				element.find(".wizard-step-wrap").css({top:scope.top+"px",bottom:"0"});
 			}
 		};
 	}).directive('wizardGroup', [

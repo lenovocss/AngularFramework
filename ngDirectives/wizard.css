@@ -87,13 +87,14 @@
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 50px;
 }
 .wizard-title{
   font-size: 24px;
   color: #444;
   z-index: 99;
   position: relative;
+  height:34px;
 }
 .wizard-footer{
   position: absolute;
@@ -113,14 +114,13 @@
   margin-left: 10px;
 }
 .wizard-step-wrap{ 
-  height: 100%;
-  width: 100%;
-  margin-top: -108px;
-  padding-top: 108px;
+  left: 0;
+  right:0;
   position: absolute;
   overflow: hidden;
 }
 .wizard-bread{
   position: relative;
   z-index: 999;
+  height:22px;
 }
