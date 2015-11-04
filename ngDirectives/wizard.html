@@ -10,7 +10,7 @@
                 </li>
             </ul>     
         </div>
-        <div class="wizard-title">步骤{{selectedIndex+1}}:{{steps[selectedIndex].hdTitle}}
+        <div class="wizard-title" ng-if="steps[selectedIndex].hdTitle">步骤{{selectedIndex+1}}:{{steps[selectedIndex].hdTitle}}
         <button class="btn btn-link pull-right" ng-click="cancel()" ng-show="selectedItem.index==0" style=" font-weight: bold;padding-right: 20px">取消并退出</button>
         </div>
         <div class="wizard-step-wrap">
