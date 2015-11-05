@@ -351,6 +351,20 @@
     top: 3px;
 }
 
+
+@-moz-document url-prefix() { /*FF*/
+  .ui-grid-icon-ok.ui-grid-row-selected:before {
+     top: 4px;
+  }
+}
+
+@media screen and (min-width:0\0) and (min-resolution: +72dpi) {
+  /* IE9+ CSS */
+  .ui-grid-icon-ok.ui-grid-row-selected:before {
+     top: 4px;
+  }
+}
+
 .ui-grid-icon-ok.ui-grid-all-selected:before{
 	background-color:#277cd1;
 	content: ' ' !important;
