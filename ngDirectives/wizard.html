@@ -21,10 +21,10 @@
         </div>
     </div>
     <div class="wizard-footer" >
-        <button class="btn  btn-primary pull-right" ng-click="stepAction(selectedItem.index+1,'next')" ng-show="!lastStep&&showBtn||!lastStep&&selectedItem.index!=0">{{next}}</button>
+        <button class="btn  btn-primary pull-right" ng-click="stepAction(selectedItem.index+1,'next')" ng-show="(!lastStep&&config.showBtn)||(!lastStep&&selectedItem.index!=0)">{{next}}</button>
         <button class="btn  btn-primary pull-right" ng-if="check" ng-click="stepAction(steps.length-1,'next')()" ng-show="!lastStep&&selectedItem.index!=0">{{check}}</button>
         <button class="btn  btn-primary pull-right" ng-show="lastStep" ng-click="completeWizard()">{{end}}</button>
         <button class="btn  btn-success pull-right" ng-click="stepAction(selectedItem.index-1,'previous')" ng-show="showPrev()">{{previous}}</button>
-        <button class="btn btn-link pull-right" ng-click="cancel()" ng-show="showBtn||selectedItem.index!=0">取消</button>
+        <button class="btn btn-link pull-right" ng-click="cancel()" ng-show="(!lastStep&&config.showBtn)||(selectedItem.index!=0)">取消</button>
     </div>
 </div>
