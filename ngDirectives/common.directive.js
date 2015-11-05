@@ -63,8 +63,8 @@ define(["require","angular","directives/app-directives.module"], function(requir
 	   					}
 	   				}
 	   				function  setHeight(h){
-	   					el.find(".grid-detaile-wrap").height(h);
-	   					el.find(".grid-body-wrap").css("bottom",h+"px");
+	   					el.find(".grid-detaile-wrap").height(Math.ceil(h));
+	   					el.find(".grid-body-wrap").css("bottom",Math.ceil(h)+"px");
 	   				}
 	   				
 	   				if(el.find(".grid-detaile-wrap").length==1){

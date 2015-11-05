@@ -13,7 +13,10 @@ define(["require", "angular", "directives/app-directives.module","css!directives
 				next : '@',
 				previous : '@',
 				end : '@',
-				top:'@'
+				top:'@',
+				check:"@",
+				showBtn:"&",
+				cancel:"&"
 			},
 			controller : [
 				'$scope','$state',
@@ -80,9 +83,7 @@ define(["require", "angular", "directives/app-directives.module","css!directives
 						else
 							return true;
 					};
-					$scope.cancel=function(){
-						window.history.back();
-					};
+					
 					$scope.managerStep = function (index) {
 						angular.forEach($scope.steps, function (scope) {
 							if (scope.hd.index === index) {
