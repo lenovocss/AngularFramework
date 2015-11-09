@@ -110,7 +110,7 @@
   height: 100%;
   overflow: auto;
 }
-.wizard-footer button{
+.wizard-footer button,.wizard-footer label{
   margin-left: 10px;
 }
 .wizard-step-wrap{ 

@@ -19,8 +19,8 @@ define(["require", "angular", "directives/app-directives.module","css!directives
 				cancel:"&"
 			},
 			controller : [
-				'$scope','$state',
-				function ($scope,$state) {
+				'$scope','$state','$timeout',
+				function ($scope,$state,$timeout) {
 					var me = this;
 					me.events = [];
 					me.exeIndex = 0;
@@ -153,6 +153,9 @@ define(["require", "angular", "directives/app-directives.module","css!directives
 						if (errors != undefined) {
 							$scope.showErrors = true;
 							$scope.errors = errors;
+							$timeout(function(){
+								$scope.showErrors = false;
+							},1000);
 						}
 						$scope.selectedItem.complete = false;
 					},
