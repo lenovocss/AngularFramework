@@ -31,8 +31,9 @@ define(["require","angular"], function(require,ng) {
 				}); 
 				scope.expand=function(menu){
 					menu.expand=!menu.expand;
+					var params = menu.params.replace(/'/g,'"');
 					if(menu.goto){
-						$state.go(menu.urlState);
+						$state.go(menu.urlState,angular.fromJson(params));
 					}
 				}
 				_checkUrl=function(state,url){
