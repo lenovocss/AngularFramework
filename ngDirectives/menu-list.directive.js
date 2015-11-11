@@ -19,18 +19,21 @@ define(["require","angular"], function(require,ng) {
 
 				httpUtils.httpGet(scope.url).then(function(data) {
 		            scope.menus = data.resultObject || data;
-		            if("app"!=$state.current.name)
-		            	_setActive(scope.menus,$state.current.name);  
+		            if("app"!=$state.current.name){
+		            	_setActive(scope.menus,$state.current.name + "(" + decodeURIComponent(JSON.stringify($state.params)).replace(/"/g,'\'') + ")");  
+		            }
 		        }, function() {
 		             scope.menus = [];
 		        });   
 		    	
 		        $rootScope.$on('$stateChangeStart', 
 				function(event, toState, toParams, fromState, fromParams){ 
-				    _setActive(scope.menus,toState.name);
+					var url = toState.name + "(" + decodeURIComponent(JSON.stringify(toParams)).replace(/"/g,'\'') + ")";
+				    _setActive(scope.menus,url);
 				}); 
 				scope.expand=function(menu){
 					menu.expand=!menu.expand;
+					if(!menu.params) return;
 					var params = menu.params.replace(/'/g,'"');
 					if(menu.goto){
 						$state.go(menu.urlState,angular.fromJson(params));
