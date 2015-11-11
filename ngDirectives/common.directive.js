@@ -41,7 +41,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 	   			},
 	   			link:function($scope,el,attrs){
 	   				var top=el.position().top;
-	   				if($('div[grid-paging]').length){
+	   				if(el.prevAll('div[grid-paging]').length){
 	   					top+=45;
 	   				}
 	   				el.css("top",top);
