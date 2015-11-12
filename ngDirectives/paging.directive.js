@@ -139,6 +139,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 
 		   		function _search($event){ 
 		   			console.log("$event:",$event.keyCode);
+					temp = {};
 		   		 	delete temp['tag_key'];
 		   		 	delete temp['tag_value'];
 		   		 	delete temp['name'];
