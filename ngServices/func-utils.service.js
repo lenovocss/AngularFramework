@@ -13,7 +13,8 @@ define(['require','angular','services/app-utils.module','components/index'], fun
 				"gridColumnsModal":gridColumnsModal,
                 "setFieldFilter":setFieldFilter,
                 "throttle":throttle,
-                "debounce":debounce
+                "debounce":debounce,
+				"queryString":queryString
 			};
 			
 			return funcs;
@@ -180,7 +181,13 @@ define(['require','angular','services/app-utils.module','components/index'], fun
                         leadingExc=false;
                     }, delay);
                 }
-            }    
+            }
+			function queryString(data) { 
+                var str = ""; 
+                for (var i in data) 
+                    str += (str ? ("&" + i + "=" + data[i]) : (i + "=" + data[i])); 
+                return "?" + str; 
+            }
         }
     ]);
 });
