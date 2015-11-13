@@ -20,7 +20,7 @@ define(["require","angular"], function(require,ng) {
 				httpUtils.httpGet(scope.url).then(function(data) {
 		            scope.menus = data.resultObject || data;
 		            if("app"!=$state.current.name){
-		            	_setActive(scope.menus,$state.current.name + "(" + decodeURIComponent(JSON.stringify($state.params)).replace(/"/g,'\'') + ")");  
+		            	_setActive(scope.menus,$state.current.name + "(" + JSON.stringify($state.params).replace(/"/g,'\'') + ")");  
 		            }
 		        }, function() {
 		             scope.menus = [];
@@ -28,7 +28,7 @@ define(["require","angular"], function(require,ng) {
 		    	
 		        $rootScope.$on('$stateChangeStart', 
 				function(event, toState, toParams, fromState, fromParams){ 
-					var url = toState.name + "(" + decodeURIComponent(JSON.stringify(toParams)).replace(/"/g,'\'') + ")";
+					var url = toState.name + "(" + JSON.stringify(toParams).replace(/"/g,'\'') + ")";
 				    _setActive(scope.menus,url);
 				}); 
 				scope.expand=function(menu){
