@@ -77,8 +77,9 @@ define(['require','angular','services/app-utils.module','components/index'], fun
                 scope.minlen = Global_Conf_Map.MIN_LENGTH;
                 scope.display_name = Global_Conf_Map.DISPLAY_NAME;
                 scope.email = Global_Conf_Map.E_MAIL;
-                scope.des = Global_Conf_Map.REGEXP_DESC,
-                scope.positive_integer = Global_Conf_Map.POSITIVE_INTEGER
+                scope.des = Global_Conf_Map.REGEXP_DESC;
+                scope.positive_integer = Global_Conf_Map.POSITIVE_INTEGER;
+                scope.maxNumber = Global_Conf_Map.maxNumber;
             }
 			 
 
