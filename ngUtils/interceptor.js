@@ -5,7 +5,9 @@ define(["require","angular"], function(require,ng) {
 		var service = {
 			handleErrors:function(response){
 				var statusCode = response.status;
-				if(statusCode>=300)
+				if(statusCode ==307)
+					window.location.href="/signin";
+				else if(statusCode>=300)
 				 	this["unknownError"](response);
 			}, 
 			unknownError:function(response){
