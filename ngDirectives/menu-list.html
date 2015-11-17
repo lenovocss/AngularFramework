@@ -5,10 +5,10 @@
 	<!-- activate -->
  	<div  ng-repeat="menu in menus track by $index" >
  		
-		<a ng-if="!(menu.children || menu.childen)" class="gwt-Anchor menu-item " ui-sref="{{menu.href}}" ng-class="{'activate':menu.activate}" style="">
+		<a ng-if="(menu.children=='' || menu.childen=='')" class="gwt-Anchor menu-item " ui-sref="{{menu.href}}" ui-sref-opt="{'reload':true}" ng-class="{'activate':menu.activate}" style="">
 			{{menu.title}}
 		</a>
-		<div ng-if="(menu.children || menu.childen)" ng-click="expand(menu);" class="menu-title">
+		<div ng-if="!(menu.children==''|| menu.childen=='')" ng-click="expand(menu);" class="menu-title">
 			
 			<img ng-if="menu.expand" width="12" height="12" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAbUlEQVR42pWS0QqAIAxF+2E/0l+RMDJDkCTEh+oKXTAs1uDAtrvztuG4SmstAjWgKaWIwG1X2HOWCTj8gkJKSQSFGLe6UEp1QQ4orCHUxZtw540AFu/ZP0FGYXauAWFvpmDtJIKCMaOIKvx9jRMpg/1z7OWcbgAAAABJRU5ErkJggg==" class="node-image">
 			<img ng-if="!menu.expand" width="12" height="12" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAc0lEQVR42pWSUQqAIBBEu7CH9CoSRmYIkoT4Ua0wCytFuvDQHef9OV3PaK27oJnoUkrpgrqvglKq8iucOVcgYAcspJQEENqchRgPLn1BHRb2EMYFYvNeyMjxxsLqnAACdirTyYK1iwBCm7NgzNxFFUa/xg0ZL+SjzpdOZwAAAABJRU5ErkJggg==" class="node-image">
