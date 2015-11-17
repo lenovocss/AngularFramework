@@ -9,6 +9,10 @@ define(["require","angular"], function(require,ng) {
 			},
 			templateUrl:cmpConfig.directivesPath+"menu-list.html",
 			link:function(scope,ele,attrs){
+				//如果测试通过请求静态资源文件，否则通过后台接口url形式请求menu 菜单
+				if(scope["url"].indexOf(cmpConfig.apiTestUrl)==-1){
+					scope.url = cmpConfig.apiUrl+scope.url;
+				}
 				if(scope.url){
 					httpUtils.httpGet(scope.url).then(function(data) {
 			            scope.menus = data.resultObject || data;
