@@ -18,13 +18,16 @@ define(["require","angular"], function(require,ng) {
 			        }, function() {
 			             scope.menus = [];
 			        });
+				}else{
+					scope.$watch('menuData', function(newValue, oldValue, scope) {
+						scope.menus = newValue;
+						if(scope.menus){
+							if("app"!=$state.current.name){
+				            	_setActive(scope.menus,$state.current.name + "(" + JSON.stringify($state.params).replace(/"/g,'\'') + ")");  
+				            }
+						}
+					});
 				}
-				scope.$watch('menuData', function(newValue, oldValue, scope) {
-					scope.menus = newValue;
-		            if("app"!=$state.current.name){
-		            	_setActive(scope.menus,$state.current.name + "(" + JSON.stringify($state.params).replace(/"/g,'\'') + ")");  
-		            }
-				});
 		        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){ 
 					var url = toState.name + "(" + JSON.stringify(toParams).replace(/"/g,'\'') + ")";
 				    _setActive(scope.menus,url);
