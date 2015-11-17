@@ -3,49 +3,54 @@ define(["require","angular"], function(require,ng) {
 	module.directive('menuList',['$location','$q','$http','funcUtils','httpUtils','$rootScope','$state',function($location,$q,$http,funcUtils,httpUtils,$rootScope,$state){
 		return {
 			trstrice:"EA",
-			/*scope:{
+			scope:{
 				url:"@",
-                menudata:"@"
-			},*/
-			controller:"layoutCtrl",
+				menuData:"="
+			},
 			templateUrl:cmpConfig.directivesPath+"menu-list.html",
 			link:function(scope,ele,attrs){
-				if($location.search()["debug"]){
-					scope.url = "../testdata/menu.json";
+				if(scope.url){
+					httpUtils.httpGet(scope.url).then(function(data) {
+			            scope.menus = data.resultObject || data;
+			            if("app"!=$state.current.name){
+			            	_setActive(scope.menus,$state.current.name + "(" + JSON.stringify($state.params).replace(/"/g,'\'') + ")");  
+			            }
+			        }, function() {
+			             scope.menus = [];
+			        });
 				}
-		        $rootScope.$on('$stateChangeStart', 
-				function(event, toState, toParams, fromState, fromParams){ 
-				/*	httpUtils.httpGet(tempUrl).then(function(data) {
-		            scope.menus = data.resultObject || data;
-		            if("app"!=$state.current.name)
-		            	_setActive(scope.menus,$state.current.name);  
-		        }, function() {
-		             scope.menus = [];
-		        }); */
-		        console.log(scope.menus)
-				    _setActive(scope.menus,toState.name);
+				scope.$watch('menuData', function(newValue, oldValue, scope) {
+					scope.menus = newValue;
+		            if("app"!=$state.current.name){
+		            	_setActive(scope.menus,$state.current.name + "(" + JSON.stringify($state.params).replace(/"/g,'\'') + ")");  
+		            }
+				});
+		        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){ 
+					var url = toState.name + "(" + JSON.stringify(toParams).replace(/"/g,'\'') + ")";
+				    _setActive(scope.menus,url);
 				}); 
-
 				scope.expand=function(menu){
-					menu.expand=!menu.expand; 
+					menu.expand=!menu.expand;
+					if(!menu.params) return;
+					var params = menu.params.replace(/'/g,'"');
+					if(menu.goto){
+						$state.go(menu.urlState,angular.fromJson(params));
+					}
 				}
-				_checkUrl=function(state,url){
+				function _checkUrl(state,url){
+					var url = decodeURIComponent(url);
 					return url.indexOf(state)!=-1 
 				};
-				_setActive=function(children,url){
-					console.log(children);
-					if(children&&children!=''&&typeof (children)!='undefined'){
-						$.each(children,function(i,v){
-							v.children = v.children || v.childen;
-							v.activate=false;
-							if(_checkUrl(v.href,url)&&(!v.children || v.children.length == 0))
-								v.activate=true;
-							if(v.children&&v.children.length>0){
-								_setActive(v.children,url);
-							}
-						});
-					}
-
+				function _setActive(children,url){
+					$.each(children,function(i,v){
+						v.children = v.children || v.childen;
+		        		v.activate=false; 
+		        		if(_checkUrl(v.href,url)&&(!v.children || v.children.length == 0))
+							v.activate=true;
+		        		if(v.children&&v.children.length>0){
+		        			_setActive(v.children,url);
+		        		}
+		        	});
 				};   
 			}
 		}
