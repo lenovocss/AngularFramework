@@ -311,6 +311,18 @@
     			td > div.text-left{
     				text-align: left;
     			}
+			.detail-label{
+				text-align:right;
+				font-weight: bold;
+				vertical-align: top;
+			}
+			.detail-content{
+				text-align:left;
+				vertical-align: top;
+				
+			word-break: break-all;
+				word-wrap: break-word
+			}
     		}
 		}
 	}
