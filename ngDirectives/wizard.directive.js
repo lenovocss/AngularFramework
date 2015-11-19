@@ -194,7 +194,7 @@ define(["require", "angular", "directives/app-directives.module","css!directives
 					template : '<div ng-transclude ng-show="show"></div>',
 					transclude : true,
 					scope : {
-						title : '@',
+						wizardGroupTitle : '@',
 						hdTitle:"@"
 					},
 					link : function (scope, element, attrs, controller) {
@@ -203,7 +203,7 @@ define(["require", "angular", "directives/app-directives.module","css!directives
 						else
 							scope.show = attrs.active;
 						scope.hd = {
-							name : scope.title,
+							name : scope.wizardGroupTitle,
 							index : controller.getStepsSize(),
 							active : scope.show ? controller.ACTIVE : controller.NO_ACTIVE
 						};
