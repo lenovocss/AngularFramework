@@ -311,7 +311,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 		   			uploader:"=",
 		   		},
 		   		replace:true,
-		   		templateUrl:cmpConfig.appPath+"components/upload.html",
+		   		templateUrl:cmpConfig.directivesPath+"upload.html",
 		   		compile:function(){
 		   			return {
 		   				pre:function(){},
