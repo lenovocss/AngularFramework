@@ -11,18 +11,14 @@ define(["require","angular"], function(require,ng) {
 			link:function(scope,ele,attrs){
 				//get Static Resource from server
 				if(scope.url){
-					if(scope["url"].indexOf(cmpConfig.apiTestUrl)==-1){
-						scope.url = cmpConfig.apiUrl+scope.url;
-					}
-					httpUtils.httpGet(scope.url).then(function(data) {
-			            scope.menus = data.resultObject || data;
-			            if("app"!=$state.current.name){
-			            	_setActive(scope.menus,$state.current.name + "(" + JSON.stringify($state.params).replace(/"/g,'\'') + ")");  
-			            }
-			        }, function() {
-			             scope.menus = [];
-			        });
+			        _httpData(scope.url);
 				}else{
+					scope.$watch('url', function(newValue, oldValue, scope) {
+						var url = newValue;
+						if(url){
+							_httpData(url);
+						}
+					});
 					scope.$watch('menuData', function(newValue, oldValue, scope) {
 						scope.menus = newValue;
 						if(scope.menus){
@@ -43,6 +39,19 @@ define(["require","angular"], function(require,ng) {
 					if(menu.goto){
 						$state.go(menu.urlState,angular.fromJson(params));
 					}
+				}
+				function _httpData(url){
+					if(url.indexOf(cmpConfig.apiTestUrl)==-1){
+						url = cmpConfig.apiUrl+url;
+					}
+					httpUtils.httpGet(url).then(function(data) {
+			            scope.menus = data.resultObject || data;
+			            if("app"!=$state.current.name){
+			            	_setActive(scope.menus,$state.current.name + "(" + JSON.stringify($state.params).replace(/"/g,'\'') + ")");  
+			            }
+			        }, function() {
+			             scope.menus = [];
+			        });
 				}
 				function _checkUrl(state,url){
 					var url = decodeURIComponent(url);
