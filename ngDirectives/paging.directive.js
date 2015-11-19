@@ -17,8 +17,8 @@ define(["require","angular","directives/app-directives.module"], function(requir
 		   		var temp={};
 		   		$scope.pagingParam = $scope.pagingParam || {itemsDeletionCount:-1};
 
-		   		$scope.pageCountList = PAGE_COUNT_LIST;
-		   		$scope.pagingParam.limit = PAGE_COUNT_LIST[0];
+		   		$scope.pageCountList = $scope.pagingParam.pageCountList || PAGE_COUNT_LIST;
+		   		$scope.pagingParam.limit = $scope.pageCountList[0];
 
                  
 		   		 if($scope.searchFilters ){
