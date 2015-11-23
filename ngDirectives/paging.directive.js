@@ -137,16 +137,11 @@ define(["require","angular","directives/app-directives.module"], function(requir
 
 				$scope.search = funcUtils.debounce(_search,500,{leading:false});
 
-		   		function _search($event){ 
-		   			console.log("$event:",$event.keyCode);
+		   		function _search(event,keyType,value){ 
 					temp = {};
-		   		 	delete temp['tag_key'];
-		   		 	delete temp['tag_value'];
-		   		 	delete temp['name'];
-		   		 	delete temp['status'];
-		   		 	if($scope.value || 
-		   		 		(!$scope.value && ($event.keyCode == 8 || $event.keyCode == 46))){//backspace or delete
-		   		 		temp[$scope['keyType']['key']]=$scope.value;
+		   		 	if(value || 
+		   		 		(!value && (event.keyCode == 8 || event.keyCode == 46))){//backspace or delete
+		   		 		temp[keyType['key']]=value;
 				   		for(var key in temp){
 							if(temp[key]==''){
 								delete temp[key];
