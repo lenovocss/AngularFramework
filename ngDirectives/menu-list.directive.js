@@ -55,6 +55,7 @@ define(["require","angular"], function(require,ng) {
 				}
 				function _checkUrl(state,url){
 					var url = decodeURIComponent(url);
+					var state = decodeURIComponent(state);
 					return url.indexOf(state)!=-1 
 				};
 				function _setActive(children,url){
