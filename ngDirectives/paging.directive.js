@@ -45,7 +45,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 		   		$scope.keyType=$scope.keyTypes[0]; 
 
 				var unwatchItemsCount = $scope.$watch('pagingParam.itemsCount', function(newValue, oldValue, scope) {
-					console.log("itemsCount:",newValue,oldValue);
+					
 					
 					newValue = newValue * 1;
 					if(newValue > 0){
@@ -59,7 +59,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 				});
 				
 				var unwatchItemsDeletionCount = $scope.$watch('pagingParam.itemsDeletionCount', function(newValue, oldValue, scope) {
-					console.log("itemsDeletionCount:",newValue,oldValue);
+					
 					
 					if(newValue > 0){
 						$scope.pagingParam.itemsCount -= newValue;
@@ -110,7 +110,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 				}
 
 				$scope.changePageCount = function(){
-					console.log("changePageCount:",$scope.pagingParam.limit);
+					
 					_computePages($scope.pagingParam.itemsCount);
 					$scope.navFun()();
 				}
@@ -134,7 +134,10 @@ define(["require","angular","directives/app-directives.module"], function(requir
 					}
 				}
 
-
+				$scope.resetSearch = function(){
+					$scope.value="";	
+					$(".grid-seach-input").val("");
+				}
 				$scope.search = funcUtils.debounce(_search,500,{leading:false});
 
 		   		function _search(event,keyType,value){ 
