@@ -11,7 +11,7 @@
 	        <ui-select ng-model="pagingParam.namespace" ng-if="pagingParam.showNameSpaces">
 	            <ui-select-match placeholder="{{pagingParam.namespaceTip}}" >{{$select.selected.type}}</ui-select-match>
 	            <ui-select-choices repeat="metric in pagingParam.namespaces | filter: $select.search">
-	                <span ng-bind-html="metric.type | highlight: $select.search"></span>
+	                <span ng-bind-html="metric.type"></span>
 	            </ui-select-choices>
 	        </ui-select>
 	    </div>
