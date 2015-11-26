@@ -31,13 +31,6 @@ define(["require","angular"], function(require,ng) {
 		        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){ 
 					scope.toState = toState;
 					var url = toState.name + "(" + JSON.stringify(toParams).replace(/"/g,'\'') + ")";
-					/*angular.forEach(scope.menus, function(menu, key){
-						if(toState.name == "app.metric"){
-							scope.menus[key].href = url;
-							scope.menus[key].urlState = url;
-						}
-						
-					});*/
 				    _setActive(scope.menus,url);
 				}); 
 				scope.expand=function(menu){
