@@ -1,7 +1,7 @@
 define(['require','angular','services/app-utils.module','components/index'], function(require,ng,module){
     
 
-    module.factory('funcUtils',['$window',"$http","$q",'$modal','uiGridConstants','Global_Conf_Map',function($window,$http,$q,$modal,uiGridConstants,Global_Conf_Map){ 
+    module.factory('funcUtils',['$window',"$http","$q",'$modal','uiGridConstants','COMMON_REGEX_PATTERN',function($window,$http,$q,$modal,uiGridConstants,COMMON_REGEX_PATTERN){ 
             var funcs = {
 				"generateId" : generateId,
 				"delArrayByIndex" : delArrayByIndex,
@@ -73,13 +73,13 @@ define(['require','angular','services/app-utils.module','components/index'], fun
 
 			}
             function setFieldFilter(scope){
-                scope.maxlen = Global_Conf_Map.MAX_LENGTH;
-                scope.minlen = Global_Conf_Map.MIN_LENGTH;
-                scope.display_name = Global_Conf_Map.DISPLAY_NAME;
-                scope.email = Global_Conf_Map.E_MAIL;
-                scope.des = Global_Conf_Map.REGEXP_DESC;
-                scope.positive_integer = Global_Conf_Map.POSITIVE_INTEGER;
-                scope.maxNumber = Global_Conf_Map.maxNumber;
+                scope.maxlen = COMMON_REGEX_PATTERN.MAX_LENGTH;
+                scope.minlen = COMMON_REGEX_PATTERN.MIN_LENGTH;
+                scope.display_name = COMMON_REGEX_PATTERN.DISPLAY_NAME;
+                scope.email = COMMON_REGEX_PATTERN.E_MAIL;
+                scope.des = COMMON_REGEX_PATTERN.REGEXP_DESC;
+                scope.positive_integer = COMMON_REGEX_PATTERN.POSITIVE_INTEGER;
+                scope.maxNumber = COMMON_REGEX_PATTERN.maxNumber;
             }
 			 
 
