@@ -6,7 +6,7 @@ define(['require','angular','services/app-utils.module'], function(require,ng,mo
             
             return funcs;
 
-            function createDownloadLink(filePath){
+            function createDownloadLink(attachment){
 
                 function eventFire(el, etype){
                     if (el.fireEvent) {
@@ -20,7 +20,7 @@ define(['require','angular','services/app-utils.module'], function(require,ng,mo
 
                 var link = document.createElement("a");
                 link.download = attachment.FileName;
-                link.href = filePath;
+                link.href = attachment.FilePath;
                 eventFire(link, "click");
             }
         }
