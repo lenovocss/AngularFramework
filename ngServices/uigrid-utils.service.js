@@ -6,7 +6,8 @@ define(['require','angular','services/app-utils.module','components/index'], fun
 				"setTableCheckAll":setTableCheckAll,
 				"initTableSelect":initTableSelect,
 				"gridColumnsModal":gridColumnsModal,
-				"resetGridSelection":resetGridSelection
+				"resetGridSelection":resetGridSelection,
+				"getSelectedProperties":getSelectedProperties
 			};
 			
 			return funcs;
@@ -74,6 +75,17 @@ define(['require','angular','services/app-utils.module','components/index'], fun
 			function resetGridSelection(gridApi){
 				gridApi.selection.clearSelectedRows();
 				gridApi.grid.selection.selectedCount=0;
+			}
+			
+			function getSelectedProperties(gridApi,propName){
+				propName = propName || "id";
+
+				var rows = gridApi.selection.getSelectedRows(),props=[];
+				for(var i=0;i<rows.length;i++){
+					props.push(rows[i][propName]);
+				}
+
+				return props;
 			}
         }
     ]);
