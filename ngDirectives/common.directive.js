@@ -126,13 +126,15 @@ define(["require","angular","directives/app-directives.module"], function(requir
 	   		}
 	   	}
 	   }])
-	   .directive('maxHeight',['$window','domUtils',function($window,domUtils){
-		   console.log("max height....");
+	   .directive('heightInContent',['$window','domUtils',function($window,domUtils){
 	   	return {
 	   		link:function(scope,el,attrs){
-	   			domUtils.setHeight(el,-62);
+	   			$(function(){
+					$(el).css({"height":$(".content-wrap").height() + parseInt(attrs.heightInContent)});
+				});
+				
 	   			angular.element($window).on('resize', function () {
-					 domUtils.setHeight(el,-62);
+					$(el).css({"height":$(".content-wrap").height() + parseInt(attrs.heightInContent)});
 				});
 	   		}
 	   	}
