@@ -5,6 +5,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 	   	return { 
 	   		restrict:"AE",
 		   	replace:true,
+		   	transclude:true,
 		   	scope:{
 	 			pagingParam:"=",
 	 			searchFilters:"=",
