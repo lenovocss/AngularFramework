@@ -127,17 +127,20 @@ define(["require","angular","directives/app-directives.module"], function(requir
 	   	}
 	   }])
 	   .directive('heightInContent',['$window','domUtils',function($window,domUtils){
-	   	return {
-	   		link:function(scope,el,attrs){
-	   			$(function(){
-					$(el).css({"height":$(".content-wrap").height() + parseInt(attrs.heightInContent)});
-				});
-				
-	   			angular.element($window).on('resize', function () {
-					$(el).css({"height":$(".content-wrap").height() + parseInt(attrs.heightInContent)});
-				});
-	   		}
-	   	}
+			return {
+				link:function(scope,el,attrs){
+					
+					$(function(){
+						var  h = $(".content-wrap").height();
+						$(el).css({"height":h + scope.$eval(attrs.heightInContent,{height:h})});
+					});
+					
+					angular.element($window).on('resize', function () {
+						var  h = $(".content-wrap").height();
+						$(el).css({"height":h + scope.$eval(attrs.heightInContent,{height:h})});
+					});
+				}
+			}
 	   }])
 	   .directive('toolTip',['$window',function($window){
 		   	return {
