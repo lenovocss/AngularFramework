@@ -44,7 +44,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 	   				if(el.prevAll('div[grid-paging]').length){
 	   					top+=45;
 	   				}
-	   				el.css("top",Math.floot(top));
+	   				el.css("top",Math.floor(top));
 	   				el.css("position","absolute");
 	   				var gridHeight = el.height();
 	   				function set(){
