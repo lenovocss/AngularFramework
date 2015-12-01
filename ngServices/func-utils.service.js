@@ -6,6 +6,7 @@ define(['require','angular','services/app-utils.module'], function(require,ng,mo
 			var funcs = {
 				"generateId" : generateId,
 				"delArrayByIndex" : delArrayByIndex,
+				"delArrayItems" : delArrayItems,
 				"formatStr" : formatStr, 
 				"setTableCheckAll":uiGridUtils.setTableCheckAll,
 				"initTableSelect":uiGridUtils.initTableSelect,
@@ -41,6 +42,22 @@ define(['require','angular','services/app-utils.module'], function(require,ng,mo
 				for(var i=0;i<arr.length;i++){
 					if(callback(arr[i],i)){
 						return arr.splice(i,1);
+					}
+				}
+			}
+			
+			/**
+			* 从arr中删除所有属于items数组中的元素
+			* 根据cb返回值确定相等性
+			**/
+			function delArrayItems(arr,items,cb){
+				for(var j=0;j<items.length;j++){
+					for(var i=0;i<arr.length;i++){
+						var isEqual = cb ? cb(arr[i],items[j]) : (arr[i] === items[j]);
+						if(isEqual){
+							arr.splice(i,1);
+							break;
+						}
 					}
 				}
 			}
