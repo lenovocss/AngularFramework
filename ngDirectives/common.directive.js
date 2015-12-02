@@ -495,5 +495,26 @@ define(["require","angular","directives/app-directives.module"], function(requir
 	    			},100);
 	    		}
 	    	};
+	    }]).directive('downLoadFile',['$timeout',function($timeout){
+	    	return {
+	    		restrict:"EA",
+	    		scope:{
+	    			formConfig:"="
+	    		},
+	    		replace:true,
+	    		transclude:true,
+	    		templateUrl:cmpConfig.directivesPath+"download.html",
+	    		link:function($scope,ele,attrs,parentCtrl){
+	    			$scope.$watch("formConfig.submit",function(new_val,old_val){
+	    				if(new_val!=old_val&&new_val==true){
+	    					$timeout(function(){
+	    						ele.submit();
+	    						$scope.formConfig.submit=false;
+	    					},0);
+	    				}	
+	    			});
+	    		}
+
+	    	}
 	    }]);
 });

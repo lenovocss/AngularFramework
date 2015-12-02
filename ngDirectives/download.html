@@ -1,0 +1,6 @@
+<form class="downLoadFileForm" action="{{formConfig.actionUrl}}" method="{{formConfig.method}}" target="downFileForm_iframe" id="downLoadFileForm" style="display:none">
+    <input type="hidden" ng-repeat="item in formConfig.formData track by $index" name="{{item.name}}" value="{{item.value}}">{{item}}
+    <div ng-transclude></div>
+    <input type="submit">
+<form>
+<iframe name="downFileForm_iframe" width="0" height="0" scrolling="no"></iframe>
