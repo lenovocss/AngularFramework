@@ -433,7 +433,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 						scope.titles = [];
 						for(var i=0;i<configJson.length;i++){
 							if(checkTypes(errors,configJson[i]) && (scope.field.$invalid && !scope.field.$pristine ||!ngModel.$modelValue&& scope.form.$submitted)){
-								console.log("ngModel",scope.multiple,ngModel.$modelValue);	
+								//console.log("ngModel",scope.multiple,ngModel.$modelValue);	
 								if(scope.titles.length < 1){
 									scope.titles.push(configJson[i].tip);
 								}
@@ -458,7 +458,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 					}
 					
 					var unwatchError = scope.$watchCollection('field.$error',function(newValue, oldValue, scope){
-						console.log("fieldError:",scope.field.$error,newValue,oldValue);
+						//console.log("fieldError:",scope.field.$error,newValue,oldValue);
 						if(oldValue){
 							handleErrors(newValue);
 						}
