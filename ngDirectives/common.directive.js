@@ -44,7 +44,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 	   				if(el.prevAll('div[grid-paging]').length){
 	   					top+=45;
 	   				}
-	   				el.css("top",Math.floor(top));
+	   				el.css("top",top);
 	   				el.css("position","absolute");
 	   				var gridHeight = el.height();
 	   				function set(){
@@ -126,21 +126,16 @@ define(["require","angular","directives/app-directives.module"], function(requir
 	   		}
 	   	}
 	   }])
-	   .directive('heightInContent',['$window','domUtils',function($window,domUtils){
-			return {
-				link:function(scope,el,attrs){
-					
-					$(function(){
-						var  h = $(".content-wrap").height();
-						$(el).css({"height":h + scope.$eval(attrs.heightInContent,{height:h})});
-					});
-					
-					angular.element($window).on('resize', function () {
-						var  h = $(".content-wrap").height();
-						$(el).css({"height":h + scope.$eval(attrs.heightInContent,{height:h})});
-					});
-				}
-			}
+	   .directive('maxHeight',['$window','domUtils',function($window,domUtils){
+		   console.log("max height....");
+	   	return {
+	   		link:function(scope,el,attrs){
+	   			domUtils.setHeight(el,-62);
+	   			angular.element($window).on('resize', function () {
+					 domUtils.setHeight(el,-62);
+				});
+	   		}
+	   	}
 	   }])
 	   .directive('toolTip',['$window',function($window){
 		   	return {
@@ -316,7 +311,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 		   			uploader:"=",
 		   		},
 		   		replace:true,
-		   		templateUrl:cmpConfig.directivesPath+"upload.html",
+		   		templateUrl:cmpConfig.appPath+"components/upload.html",
 		   		compile:function(){
 		   			return {
 		   				pre:function(){},
@@ -433,7 +428,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 						scope.titles = [];
 						for(var i=0;i<configJson.length;i++){
 							if(checkTypes(errors,configJson[i]) && (scope.field.$invalid && !scope.field.$pristine ||!ngModel.$modelValue&& scope.form.$submitted)){
-								//console.log("ngModel",scope.multiple,ngModel.$modelValue);	
+								console.log("ngModel",scope.multiple,ngModel.$modelValue);	
 								if(scope.titles.length < 1){
 									scope.titles.push(configJson[i].tip);
 								}
@@ -458,7 +453,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 					}
 					
 					var unwatchError = scope.$watchCollection('field.$error',function(newValue, oldValue, scope){
-						//console.log("fieldError:",scope.field.$error,newValue,oldValue);
+						console.log("fieldError:",scope.field.$error,newValue,oldValue);
 						if(oldValue){
 							handleErrors(newValue);
 						}
@@ -483,38 +478,23 @@ define(["require","angular","directives/app-directives.module"], function(requir
 	    			data:"="
 	    		},
 	    		link: function($scope, iElm, iAttrs, controller) {
-	    			var height = $(iElm)[0].scrollHeight;
+	    			var height = $(iElm).height();
 	    			var pillarbar = $(iElm).find("#pillarbar");
 	    			/*var overplus = $(iElm).find("#overplus");
 	    			var used = $(iElm).find("#used");*/
-	    			var nowheight = parseInt(height*($scope.data.used/$scope.data.total));
-	    			$timeout(function(){
-	    				pillarbar.animate({
-					      height:nowheight
-					    });
-	    			},100);
+	    			$scope.$watch('data',function(new_val,old_val){
+	    				if(new_val&&new_val.used){
+	    					var nowheight = parseInt(height*(new_val.used/new_val.total));
+			    			//console.log(nowheight);
+			    			
+		    				pillarbar.animate({
+						      height:nowheight
+						    });
+			    			
+	    				}
+	    			})
+	    			
 	    		}
 	    	};
-	    }]).directive('downLoadFile',['$timeout',function($timeout){
-	    	return {
-	    		restrict:"EA",
-	    		scope:{
-	    			formConfig:"="
-	    		},
-	    		replace:true,
-	    		transclude:true,
-	    		templateUrl:cmpConfig.directivesPath+"download.html",
-	    		link:function($scope,ele,attrs,parentCtrl){
-	    			$scope.$watch("formConfig.submit",function(new_val,old_val){
-	    				if(new_val!=old_val&&new_val==true){
-	    					$timeout(function(){
-	    						ele.submit();
-	    						$scope.formConfig.submit=false;
-	    					},0);
-	    				}	
-	    			});
-	    		}
-
-	    	}
 	    }]);
 });
