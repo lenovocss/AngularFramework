@@ -1,12 +1,12 @@
 <div class="grid-seach-bar clearfix">
-	<div class="col-xs-8" style="padding-left:0;padding-right:0;max-width:474px;" ng-if="!pagingParam.selfDefineSearch">
+	<div class="col-xs-8" style="padding-left:0;padding-right:0;max-width:574px;" ng-if="!pagingParam.selfDefineSearch">
 		<span class="grid-seach-label">筛选条件:</span>
 		<span> 
 			<select  ng-change="resetSearch()" ng-options="keyType.value for keyType in keyTypes" class="form-control grid-seach-select" ng-model="keyType" name="volume"> </select>
 			<input name="value" ng-model="value" ng-keyup="search($event,keyType,value)" class="grid-seach-input" placeholder="值"> 
 		</span>
 	</div>
-	<div class="col-xs-8" style="padding-left:0;padding-right:0;max-width:474px;" ng-if="pagingParam.selfDefineSearch" ng-transclude>
+	<div class="col-xs-8" style="padding-left:0;padding-right:0;max-width:574px;" ng-if="pagingParam.selfDefineSearch" ng-transclude>
     </div>
     <div class="col-xs-4 pull-right" style="padding-left:0;padding-right:0;min-width:337px;">
 		<span ng-show="pagingParam && pagingParam.itemsCount * 1 > 0">
