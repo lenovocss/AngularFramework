@@ -483,16 +483,22 @@ define(["require","angular","directives/app-directives.module"], function(requir
 	    			data:"="
 	    		},
 	    		link: function($scope, iElm, iAttrs, controller) {
-	    			var height = $(iElm)[0].scrollHeight;
+	    			var height = $(iElm).height();
 	    			var pillarbar = $(iElm).find("#pillarbar");
 	    			/*var overplus = $(iElm).find("#overplus");
 	    			var used = $(iElm).find("#used");*/
-	    			var nowheight = parseInt(height*($scope.data.used/$scope.data.total));
-	    			$timeout(function(){
-	    				pillarbar.animate({
-					      height:nowheight
-					    });
-	    			},100);
+	    			$scope.$watch('data',function(new_val,old_val){
+	    				if(new_val&&new_val.used){
+	    					var nowheight = parseInt(height*(new_val.used/new_val.total));
+			    			//console.log(nowheight);
+			    			
+		    				pillarbar.animate({
+						      height:nowheight
+						    });
+			    			
+	    				}
+	    			})
+	    			
 	    		}
 	    	};
 	    }]).directive('downLoadFile',['$timeout',function($timeout){
