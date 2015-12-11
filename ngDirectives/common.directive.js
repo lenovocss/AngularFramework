@@ -522,5 +522,22 @@ define(["require","angular","directives/app-directives.module"], function(requir
 	    		}
 
 	    	}
+	    }]).directive('autoSelectInput',['$rootScope','$timeout',function($rootScope,$timeout){
+	    	return {
+	    		restrict:"EA",
+	    		link:function($scope,ele,attrs,parentCtrl){
+					
+					$rootScope.$on(attrs.autoSelectInput,function(){
+						$timeout(function(){
+							$(ele).get(0).select();
+							$(ele).get(0).focus();
+						},100);
+						
+					});
+					
+	    			
+	    		}
+
+	    	}
 	    }]);
 });

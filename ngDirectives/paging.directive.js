@@ -139,8 +139,9 @@ define(["require","angular","directives/app-directives.module"], function(requir
 				}
 
 				$scope.resetSearch = function(){
-					$scope.value="";	
-					$(".grid-seach-input").val("");
+						
+					$(".grid-seach-input").get(0).select();
+					$(".grid-seach-input").get(0).focus();
 				}
 				$scope.search = funcUtils.debounce(_search,500,{leading:false});
 
