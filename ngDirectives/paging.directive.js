@@ -52,9 +52,11 @@ define(["require","angular","directives/app-directives.module"], function(requir
 					if(newValue > 0){
 						_computePages(newValue);
 						setPageNav();
-						oldValue && $scope.navFun()();
+						$scope.refreshForDeleting && $scope.navFun()();
 						
-						$scope.pagingParam.itemsDeletionCount = -1;//reset deletion mark
+						//reset deletion mark
+						$scope.refreshForDeleting = false;
+						$scope.pagingParam.itemsDeletionCount = -1;
 					}
 					
 				});
@@ -64,6 +66,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 					
 					if(newValue > 0){
 						$scope.pagingParam.itemsCount -= newValue;
+						$scope.refreshForDeleting = true;
 					}
 					
 				});
