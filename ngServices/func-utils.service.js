@@ -16,7 +16,8 @@ define(['require','angular','services/app-utils.module'], function(require,ng,mo
                 "setFieldFilter":setFieldFilter,
                 "throttle":throttle,
                 "debounce":debounce,
-				"queryString":queryString
+				"queryString":queryString,
+				"openDownloadPage":openDownloadPage
 			};
 			
 			return funcs;
@@ -149,6 +150,10 @@ define(['require','angular','services/app-utils.module'], function(require,ng,mo
                     str += (str ? ("&" + i + "=" + data[i]) : (i + "=" + data[i])); 
                 return "?" + str; 
             }
+			
+			function openDownloadPage(url){
+				$window.open("download.jsp?url=" + encodeURIComponent(url));
+			}
         }
     ]);
 });
