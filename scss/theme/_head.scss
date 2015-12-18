@@ -62,6 +62,7 @@
         }
         .nav-menu-wrap{
           position: relative;
+          float:left;
           .nav-menu{
             background-attachment: scroll;
             background-clip: border-box;
@@ -122,7 +123,6 @@
             background-clip: padding-box;
           }
           .resourceGroupsMenuContent{
-            left: 72px;
             padding: 5px;
           }
         }
