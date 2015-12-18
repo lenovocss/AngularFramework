@@ -14,9 +14,12 @@ define(['require','angular','services/app-utils.module'], function(require,ng,mo
 				"closeMask":closeMask,
 				"gridColumnsModal":uiGridUtils.gridColumnsModal,
                 "setFieldFilter":setFieldFilter,
+                "parseQueryString":parseQueryString,
                 "throttle":throttle,
                 "debounce":debounce,
 				"queryString":queryString,
+                "parseQS":parseQS,
+                "execParseQS":execParseQS,
 				"openDownloadPage":openDownloadPage
 			};
 			
@@ -144,11 +147,38 @@ define(['require','angular','services/app-utils.module'], function(require,ng,mo
                     }, delay);
                 }
             }
-			function queryString(data) { 
-                var str = ""; 
-                for (var i in data) 
-                    str += (str ? ("&" + i + "=" + data[i]) : (i + "=" + data[i])); 
-                return "?" + str; 
+			
+            function queryString(data) { 
+                var tempArr = []; 
+                for (var attr in data){ 
+                    tempArr.push(attr+"="+data[attr]);
+                }
+                return "?" + tempArr.join("&"); 
+            }
+
+            function parseQS(url){
+                var resultObj = {}
+                if(url.indexOf("?")>=0){
+
+                    var arr = url.split("?")[1].split("&");
+                    for(var i=arr.length-1;i>=0;i--){
+                        var pairParam = arr[i].split("=");
+                        resultObj[pairParam[0]]= pairParam[1]
+                    }
+
+                }
+                return resultObj;
+            }
+
+            function execParseQS(url){
+                var tempa=null;
+                var reg=/([^=?&]+)=([^=?&]+)/g;
+                var resultObj={}
+                while( tempa=reg.exec(url)){
+                    resultObj[tempa[1]]=tempa[2];         
+                }
+                
+                return resultObj;
             }
 			
 			function openDownloadPage(url){
