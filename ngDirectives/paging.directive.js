@@ -5,6 +5,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 	   	return { 
 	   		restrict:"AE",
 		   	replace:true,
+		   	transclude:true,
 		   	scope:{
 	 			pagingParam:"=",
 	 			searchFilters:"=",
@@ -45,24 +46,27 @@ define(["require","angular","directives/app-directives.module"], function(requir
 		   		$scope.keyType=$scope.keyTypes[0]; 
 
 				var unwatchItemsCount = $scope.$watch('pagingParam.itemsCount', function(newValue, oldValue, scope) {
-					console.log("itemsCount:",newValue,oldValue);
+					
 					
 					newValue = newValue * 1;
 					if(newValue > 0){
 						_computePages(newValue);
 						setPageNav();
-						oldValue && $scope.navFun()();
+						$scope.refreshForDeleting && $scope.navFun()();
 						
-						$scope.pagingParam.itemsDeletionCount = -1;//reset deletion mark
+						//reset deletion mark
+						$scope.refreshForDeleting = false;
+						$scope.pagingParam.itemsDeletionCount = -1;
 					}
 					
 				});
 				
 				var unwatchItemsDeletionCount = $scope.$watch('pagingParam.itemsDeletionCount', function(newValue, oldValue, scope) {
-					console.log("itemsDeletionCount:",newValue,oldValue);
+					
 					
 					if(newValue > 0){
 						$scope.pagingParam.itemsCount -= newValue;
+						$scope.refreshForDeleting = true;
 					}
 					
 				});
@@ -110,7 +114,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 				}
 
 				$scope.changePageCount = function(){
-					console.log("changePageCount:",$scope.pagingParam.limit);
+					
 					_computePages($scope.pagingParam.itemsCount);
 					$scope.navFun()();
 				}
@@ -134,19 +138,18 @@ define(["require","angular","directives/app-directives.module"], function(requir
 					}
 				}
 
-
+				$scope.resetSearch = function(){
+						
+					$(".grid-seach-input").get(0).select();
+					$(".grid-seach-input").get(0).focus();
+				}
 				$scope.search = funcUtils.debounce(_search,500,{leading:false});
 
-		   		function _search($event){ 
-		   			console.log("$event:",$event.keyCode);
+		   		function _search(event,keyType,value){ 
 					temp = {};
-		   		 	delete temp['tag_key'];
-		   		 	delete temp['tag_value'];
-		   		 	delete temp['name'];
-		   		 	delete temp['status'];
-		   		 	if($scope.value || 
-		   		 		(!$scope.value && ($event.keyCode == 8 || $event.keyCode == 46))){//backspace or delete
-		   		 		temp[$scope['keyType']['key']]=$scope.value;
+		   		 	if(value || 
+		   		 		(!value && (event.keyCode == 8 || event.keyCode == 46))){//backspace or delete
+		   		 		temp[keyType['key']]=value;
 				   		for(var key in temp){
 							if(temp[key]==''){
 								delete temp[key];

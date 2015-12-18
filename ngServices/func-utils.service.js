@@ -1,41 +1,27 @@
-define(['require','angular','services/app-utils.module','components/index'], function(require,ng,module){
+define(['require','angular','services/app-utils.module'], function(require,ng,module){
     
 
-    module.factory('funcUtils',['$window',"$http","$q",'$modal','uiGridConstants','Global_Conf_Map',function($window,$http,$q,$modal,uiGridConstants,Global_Conf_Map){ 
-            var funcs = {
+    module.factory('funcUtils',['$window',"$http","$q",'$modal','uiGridUtils','COMMON_REGEX_PATTERN',function($window,$http,$q,$modal,uiGridUtils,COMMON_REGEX_PATTERN){ 
+            /***WARN: Don't put grid functions in here,please use uigrid-utils.service**/
+			var funcs = {
 				"generateId" : generateId,
 				"delArrayByIndex" : delArrayByIndex,
+				"delArrayItems" : delArrayItems,
 				"formatStr" : formatStr, 
-				"setTableCheckAll":setTableCheckAll,
-				"initTableSelect":initTableSelect,
+				"setTableCheckAll":uiGridUtils.setTableCheckAll,
+				"initTableSelect":uiGridUtils.initTableSelect,
 				"openMask":openMask,
 				"closeMask":closeMask,
-				"gridColumnsModal":gridColumnsModal,
+				"gridColumnsModal":uiGridUtils.gridColumnsModal,
                 "setFieldFilter":setFieldFilter,
                 "throttle":throttle,
                 "debounce":debounce,
-				"queryString":queryString
+				"queryString":queryString,
+				"openDownloadPage":openDownloadPage
 			};
 			
 			return funcs;
-			function gridColumnsModal(columns,gridApi){
-				var modalInstance = $modal.open({
-         			templateUrl: cmpConfig.componentsPath + 'grid-columns-show-hide.html',
-	                controller: 'GridColumnsShowHideCtrl',
-	                backdrop:'static',
-	                size:'md',
-	                resolve:{
-	                	'columns': function () {
-							return columns;
-						}
-	                }
-         		})
-         		modalInstance.result.then(function(){
-         			gridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
-         		},function(){
-         			gridApi.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
-         		})
-			}
+			
 			function openMask(){
 				if(ng.element('#load-mask').hasClass("hide"))
 					ng.element('#load-mask').removeClass("hide");
@@ -61,6 +47,22 @@ define(['require','angular','services/app-utils.module','components/index'], fun
 				}
 			}
 			
+			/**
+			* 从arr中删除所有属于items数组中的元素
+			* 根据cb返回值确定相等性
+			**/
+			function delArrayItems(arr,items,cb){
+				for(var j=0;j<items.length;j++){
+					for(var i=0;i<arr.length;i++){
+						var isEqual = cb ? cb(arr[i],items[j]) : (arr[i] === items[j]);
+						if(isEqual){
+							arr.splice(i,1);
+							break;
+						}
+					}
+				}
+			}
+			
 			function formatStr(){
 
 				var s = arguments[0],
@@ -73,55 +75,14 @@ define(['require','angular','services/app-utils.module','components/index'], fun
 
 			}
             function setFieldFilter(scope){
-                scope.maxlen = Global_Conf_Map.MAX_LENGTH;
-                scope.minlen = Global_Conf_Map.MIN_LENGTH;
-                scope.display_name = Global_Conf_Map.DISPLAY_NAME;
-                scope.email = Global_Conf_Map.E_MAIL;
-                scope.des = Global_Conf_Map.REGEXP_DESC;
-                scope.positive_integer = Global_Conf_Map.POSITIVE_INTEGER;
-                scope.maxNumber = Global_Conf_Map.maxNumber;
+                scope.maxlen = COMMON_REGEX_PATTERN.MAX_LENGTH;
+                scope.minlen = COMMON_REGEX_PATTERN.MIN_LENGTH;
+                scope.display_name = COMMON_REGEX_PATTERN.DISPLAY_NAME;
+                scope.email = COMMON_REGEX_PATTERN.E_MAIL;
+                scope.des = COMMON_REGEX_PATTERN.REGEXP_DESC;
+                scope.positive_integer = COMMON_REGEX_PATTERN.POSITIVE_INTEGER;
+                scope.maxNumber = COMMON_REGEX_PATTERN.maxNumber;
             }
-			 
-
-			function setTableCheckAll(scope){
-				var allcount=scope.gridOptions.data.length;
-				var selectcount=scope.gridApi.grid.selection.selectedCount;
-				if(allcount==selectcount){
-					scope.gridApi.grid.selection.selectAll=true;
-				}else{
-					scope.gridApi.grid.selection.selectAll=false;
-				}
-			}
-
-			function initTableSelect(scope,checkActionStatus){
-				
-				if(!scope.gridApi){
-					throw new Error("scope.gridApi is not exists");
-				}
-				
-				scope.gridApi.selection.on.rowSelectionChanged(scope,function(row){
-					setTableCheckAll(scope);
-                    if(typeof checkActionStatus=="function"){
-                        checkActionStatus();
-                        var rows = scope.gridApi.selection.getSelectedRows();
-                        if(rows.length==1){
-                            scope.entity=rows[0];
-                            scope.resourceId=scope.entity.id;
-                        }else{
-                            scope.entity={};
-                            scope.resourceId="";
-                        }
-                    }
-				}); 
-				scope.gridApi.selection.on.rowSelectionChangedBatch(scope,function(row){
-	                setTableCheckAll(scope);
-	                var rows = scope.gridApi.selection.getSelectedRows();
-                    if(typeof checkActionStatus =="function"){
-                        checkActionStatus();
-                        scope.entity=rows[0];
-                    }
-	            })
-			}
 
             /**
             * 频率控制函数， fn执行次数不超过 1 次/delay
@@ -189,6 +150,10 @@ define(['require','angular','services/app-utils.module','components/index'], fun
                     str += (str ? ("&" + i + "=" + data[i]) : (i + "=" + data[i])); 
                 return "?" + str; 
             }
+			
+			function openDownloadPage(url){
+				$window.open("download.jsp?url=" + encodeURIComponent(url));
+			}
         }
     ]);
 });

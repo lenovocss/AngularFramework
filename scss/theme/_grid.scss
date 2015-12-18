@@ -199,7 +199,6 @@
 	background: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#e0e0e0));
 	background: -ms-linear-gradient(top, #eee 0%, #e0e0e0);
 	background: linear-gradient(top,#eee 0%,#e0e0e0);
-	border-bottom: 1px solid #fff;
 	border-top: 1px solid #CCCCCC;
 	padding: 5px 10px;
 	.grid-seach-label{
@@ -213,8 +212,8 @@
 	.grid-seach-input{
 		font-size: 14px;
 	    padding-bottom: 4px;
-	    padding-left: 25px;
-	    padding-right: 25px;
+	    padding-left: 15px;
+	    padding-right: 15px;
 	    padding-top: 4px;
 	    -moz-border-bottom-colors: none;
 	    -moz-border-left-colors: none;
@@ -420,4 +419,8 @@
 .ui-grid-scrollbar-placeholder{
 	background-color:rgba(240,240,240,1) !important;
     margin-top: 0px;
+}
+
+.ui-grid-sort-priority-number{
+	display:none;
 }

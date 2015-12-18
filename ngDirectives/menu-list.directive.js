@@ -29,6 +29,7 @@ define(["require","angular"], function(require,ng) {
 					});
 				}
 		        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){ 
+					scope.toState = toState;
 					var url = toState.name + "(" + JSON.stringify(toParams).replace(/"/g,'\'') + ")";
 				    _setActive(scope.menus,url);
 				}); 
@@ -53,15 +54,26 @@ define(["require","angular"], function(require,ng) {
 			             scope.menus = [];
 			        });
 				}
-				function _checkUrl(state,url){
+				function _checkUrl(menu,url){
 					var url = decodeURIComponent(url);
-					return url.indexOf(state)!=-1 
+					var href = decodeURIComponent(menu.href);
+					//直接刷新scope.toState.name=undefine，取$state.current.name
+					var stateName = $state.current.name;
+					//跳转取scope.toState.name
+					if(scope.toState){
+						stateName = scope.toState.name
+					}
+					if(menu.noIndexof && href.indexOf(stateName)!=-1){
+						return true;
+					}else{
+						return url.indexOf(href)!=-1
+					}
 				};
 				function _setActive(children,url){
 					$.each(children,function(i,v){
 						v.children = v.children || v.childen;
 		        		v.activate=false; 
-		        		if(_checkUrl(v.href,url)&&(!v.children || v.children.length == 0))
+		        		if(_checkUrl(v,url)&&(!v.children || v.children.length == 0))
 							v.activate=true;
 		        		if(v.children&&v.children.length>0){
 		        			_setActive(v.children,url);

@@ -22,8 +22,8 @@ define(['require','angular','services/app-utils.module'], function(require,ng,mo
 				
 				$http.get(url).success(function(data) { 
 					deferred.resolve(data);
-				}).error(function() {
-					deferred.reject('Failed to load data');
+				}).error(function(data) {
+					deferred.reject(data);
 				});
 				return dataPromise;
 			}
@@ -34,7 +34,7 @@ define(['require','angular','services/app-utils.module'], function(require,ng,mo
 				$http["delete"](url).success(function(data) { 
 					deferred.resolve(data);
 				}).error(function() {
-					deferred.reject('Failed to load data');
+					deferred.reject(data);
 				});
 				return dataPromise;
 			}
@@ -44,8 +44,8 @@ define(['require','angular','services/app-utils.module'], function(require,ng,mo
 				dataPromise = deferred.promise;
 				$http.post(url,params).success(function(data) { 
 					deferred.resolve.apply(this,Array.prototype.slice.call(arguments));
-				}).error(function() {
-					deferred.reject('Failed to load data');
+				}).error(function(data) {
+					deferred.reject(data);
 				});
 				return dataPromise;
 			}
@@ -55,8 +55,8 @@ define(['require','angular','services/app-utils.module'], function(require,ng,mo
 				dataPromise = deferred.promise;
 				$http.put(url,params).success(function(data) { 
 					deferred.resolve.apply(this,Array.prototype.slice.call(arguments));
-				}).error(function() {
-					deferred.reject('Failed to load data');
+				}).error(function(data) {
+					deferred.reject(data);
 				});
 				return dataPromise;
 			}

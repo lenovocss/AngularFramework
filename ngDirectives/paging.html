@@ -1,30 +1,14 @@
 <div class="grid-seach-bar clearfix">
-	<div class="col-xs-8" style="padding-left:0;padding-right:0;max-width:470px;" ng-if="!pagingParam.selfDefineSearch">
+	<div class="col-xs-8" style="padding-left:0;padding-right:0;max-width:574px;" ng-if="!pagingParam.selfDefineSearch">
 		<span class="grid-seach-label">筛选条件:</span>
 		<span> 
-			<select  ng-options="keyType.value for keyType in keyTypes" class="form-control grid-seach-select" ng-model="keyType" name="volume"> </select>
-			<input name="value" ng-model="value" ng-keyup="search($event)" class="grid-seach-input" placeholder="值"> 
+			<select  ng-change="resetSearch()" ng-options="keyType.value for keyType in keyTypes" class="form-control grid-seach-select" ng-model="keyType" name="volume"> </select>
+			<input name="value" ng-model="value" ng-keyup="search($event,keyType,value)" class="grid-seach-input" placeholder="值"> 
 		</span>
 	</div>
-	<div class="col-xs-6" style="padding-left:0;padding-right:0;max-width:470px;" ng-if="pagingParam.selfDefineSearch">
-		<div class="col-xs-4" style="padding-right:0">
-	        <ui-select ng-model="pagingParam.namespace" ng-if="pagingParam.showNameSpaces">
-	            <ui-select-match placeholder="{{pagingParam.namespaceTip}}" >{{$select.selected.type}}</ui-select-match>
-	            <ui-select-choices repeat="metric in pagingParam.namespaces | filter: $select.search">
-	                <span ng-bind-html="metric.type | highlight: $select.search"></span>
-	            </ui-select-choices>
-	        </ui-select>
-	    </div>
-	    <div class="col-xs-8" style="padding-left:0;" ng-if="pagingParam.showSearchName">
-	        <div class="input-group">
-	            <span class="input-group-addon" style="border-radius:0;">
-	                <i class="glyphicon glyphicon-search"></i>
-	            </span>
-	            <input type="text" class="form-control" placeholder="{{pagingParam.searchNameTip}}" ng-model="pagingParam.searchName" ng-keyup="pagingParam.callback(pagingParam.searchName)">
-	        </div>
-	    </div>
+	<div class="col-xs-8" style="padding-left:0;padding-right:0;max-width:574px;" ng-if="pagingParam.selfDefineSearch" ng-transclude>
     </div>
-    <div class="col-xs-4 pull-right" style="padding-left:0;padding-right:0;min-width:340px;">
+    <div class="col-xs-4 pull-right" style="padding-left:0;padding-right:0;min-width:337px;">
 		<span ng-show="pagingParam && pagingParam.itemsCount * 1 > 0">
 			<span class="page-count-list">
 				每页显示
