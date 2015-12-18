@@ -14,7 +14,6 @@ define(['require','angular','services/app-utils.module'], function(require,ng,mo
 				"closeMask":closeMask,
 				"gridColumnsModal":uiGridUtils.gridColumnsModal,
                 "setFieldFilter":setFieldFilter,
-                "parseQueryString":parseQueryString,
                 "throttle":throttle,
                 "debounce":debounce,
 				"queryString":queryString,
