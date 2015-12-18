@@ -424,3 +424,7 @@
 .ui-grid-sort-priority-number{
 	display:none;
 }
+
+.ui-grid-cell[role='gridcell']{
+	padding-top:5px;/*viertical align cell content*/
+}
