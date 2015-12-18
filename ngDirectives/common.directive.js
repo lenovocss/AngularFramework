@@ -69,7 +69,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 	   				
 	   				if(el.find(".grid-detaile-wrap").length==1){
 
-	   					setHeight(gridHeight/3);
+	   					setHeight(gridHeight/2);
 
 		   				el.find(".min-btn").on('click',set);
 		   				el.find(".md-btn").on('click',set);
