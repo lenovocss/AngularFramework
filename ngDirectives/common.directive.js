@@ -539,5 +539,68 @@ define(["require","angular","directives/app-directives.module"], function(requir
 	    		}
 
 	    	}
+	    }]).directive('inputRepeatChecker',['$rootScope','$interval',function($rootScope,$interval){
+	    	return {
+	    		restrict:"EA",
+				require: 'ngModel',
+	    		link:function(scope,ele,attrs,ngModel){
+					var inputClass = attrs.inputRepeatChecker,vals = [];
+					
+					ngModel.$validators.repeat = function (modelValue, viewValue) {
+						
+						vals.length = 0;
+						$("." + inputClass).each(function(){
+							if($(this).get(0) !== $(ele).get(0)){//remove self
+								$(this).val() && vals.push($(this).val());
+							}
+						});
+						
+						if(vals.indexOf(viewValue) == -1) {
+						  return true
+						}
+						return false;
+					};
+					
+					var checkHandler = $interval(function(){
+						ngModel.$validate();
+					},100);
+					
+					scope.$on("$destroy",function(){
+						$interval.cancel(checkHandler);
+					});
+	    		}
+	    	}
+	    }]).directive('optionalRequired',['$rootScope','$interval',function($rootScope,$interval){
+	    	return {
+	    		restrict:"EA",
+				require: 'ngModel',
+	    		link:function(scope,ele,attrs,ngModel){
+					var inputClass = attrs.inputRepeatChecker,vals = [];
+					
+					ngModel.$validators.optional = function (modelValue, viewValue) {
+						
+						vals.length = 0;
+						$("." + inputClass).each(function(){
+							if($(this).get(0) !== $(ele).get(0)){//remove self
+								$(this).val() && vals.push($(this).val());
+							}
+						});
+						
+						if(modelValue == "" && vals.length == 0) {
+						  return false
+						}
+						
+						return true;
+					};
+					
+					var checkHandler = $interval(function(){
+						ngModel.$validate();
+					},100);
+					
+					scope.$on("$destroy",function(){
+						$interval.cancel(checkHandler);
+					});
+	    		}
+	    	}
 	    }]);
 });
