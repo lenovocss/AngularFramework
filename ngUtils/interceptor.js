@@ -29,19 +29,16 @@ define(["require","angular"], function(require,ng) {
 		return service;
 	}]);
 
-	interceptor.factory('maskService', ['$rootScope','$q','$timeout','funcUtils',function($rootScope,$q,$timeout,funcUtils){
+	 
+	interceptor.factory('maskService', ['$rootScope','$q','$timeout',function($rootScope,$q,$timeout){
 		var service = {
-			 showMask:function(config){
-			 	var QS = funcUtils.execParseQS(config.url);
-			 	 
-			 	if(/\/List.+/gi.test(config.url)&&(!QS.screenLoading||QS.screenLoading=="yes")){
+			 showMask:function(config){  
+			 	if(/\/List.+/g.test(config.url)){
 			 		$('#load-mask').removeClass("hide");
 			 	}   
 			 },
 			 hideMask:function(response){ 
-			 	var QS = funcUtils.execParseQS(response.config.url); 
-			 	
-			 	if(/\/List.+/gi.test(response.config.url)&&(!QS.screenLoading||QS.screenLoading=="yes")){
+			 	if(/\/List.+/g.test(response.config.url)){
 			 		$timeout( function() { 
                             $('#load-mask').addClass("hide"); 
                     },200);
