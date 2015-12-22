@@ -1,7 +1,7 @@
 define(['require','angular','services/app-utils.module'], function(require,ng,module){
     
 
-    module.factory('funcUtils',['$window',"$http","$q",'$modal','uiGridUtils','COMMON_REGEX_PATTERN',function($window,$http,$q,$modal,uiGridUtils,COMMON_REGEX_PATTERN){ 
+    module.factory('funcUtils',['$window','uiGridUtils','COMMON_REGEX_PATTERN',function($window,uiGridUtils,COMMON_REGEX_PATTERN){ 
             /***WARN: Don't put grid functions in here,please use uigrid-utils.service**/
 			var funcs = {
 				"generateId" : generateId,
