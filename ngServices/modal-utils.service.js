@@ -46,7 +46,7 @@ define(['require','angular','services/app-utils.module','angular-bootstrap'], fu
 				templateUrl: cmpConfig.componentsPath + 'error-dialog.html',
 				controller: 'MessageDialogCtrl',
 				backdrop:'static',
-				size:'md',
+				size:'sm',
 				windowClass:"error-dlg",
 				resolve:{
 					'entity': function () {
