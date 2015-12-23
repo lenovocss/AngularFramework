@@ -1,12 +1,68 @@
 define(['require','angular','services/app-utils.module','angular-bootstrap'], function(require,ng,module,angularBootstrap){
-    module.factory("modalUtils",['$modalStack',function($modalStack){
+    module.factory("modalUtils",['$injector','$q',function($injector,$q){
 		return {
-			modalExist : function(){
-				return !!$modalStack.getTop();
-			},
-			closeAllModals : function(){
-				$modalStack.dismissAll();
-			}
+			modalExist : modalExist,
+			closeAllModals : closeAllModals,
+			showConfirmDlg : showConfirmDlg,
+			showErrorDlg : showErrorDlg
+		};
+		
+		function modalExist(){
+			var $modalStack = $injector.get("$modalStack");
+			return !!$modalStack.getTop();
 		}
+		
+		function closeAllModals(){
+			var $modalStack = $injector.get("$modalStack");
+			return !!$modalStack.getTop();
+		}
+		
+		function showConfirmDlg(options){
+			var $modal = $injector.get("$modal"),deferred = $q.defer();
+			var modalInstance = $modal.open({
+				templateUrl: cmpConfig.componentsPath + 'confirm-dialog.html',
+				controller: 'MessageDialogCtrl',
+				backdrop:'static',
+				size:'md',
+				windowClass:"confirm-dlg",
+				resolve:{
+					'entity': function () {
+						return options;
+					}
+				}
+			})
+			modalInstance.result.then(function(){
+				deferred.resolve({status:true});
+			},function(){
+				deferred.reject("cancel");
+			});
+			
+			return deferred.promise;
+		}
+		
+		function showErrorDlg(options){
+			var $modal = $injector.get("$modal"),deferred = $q.defer();
+			var modalInstance = $modal.open({
+				templateUrl: cmpConfig.componentsPath + 'error-dialog.html',
+				controller: 'MessageDialogCtrl',
+				backdrop:'static',
+				size:'md',
+				windowClass:"error-dlg",
+				resolve:{
+					'entity': function () {
+						return options;
+					}
+				}
+			})
+			modalInstance.result.then(function(){
+				deferred.resolve();
+			},function(){
+				deferred.reject("cancel");
+			});
+			
+			return deferred.promise;
+		}
+		
+		
 	}])
 });
