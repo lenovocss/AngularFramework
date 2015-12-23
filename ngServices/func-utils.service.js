@@ -83,7 +83,7 @@ define(['require','angular','services/app-utils.module'], function(require,ng,mo
                 scope.email = COMMON_REGEX_PATTERN.E_MAIL;
                 scope.des = COMMON_REGEX_PATTERN.REGEXP_DESC;
                 scope.positive_integer = COMMON_REGEX_PATTERN.POSITIVE_INTEGER;
-                scope.maxNumber = COMMON_REGEX_PATTERN.maxNumber;
+                scope.max_number = COMMON_REGEX_PATTERN.MAX_NUMBER;
             }
 
             /**
