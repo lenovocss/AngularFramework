@@ -4,7 +4,7 @@ define(['require','angular','services/app-utils.module','angular-bootstrap'], fu
 			modalExist : modalExist,
 			closeAllModals : closeAllModals,
 			showConfirmDlg : showConfirmDlg,
-			showInfoDlg : showErrorDlg,
+			showInfoDlg : showInfoDlg,
 			showErrorDlg : showErrorDlg
 		};
 		
@@ -49,6 +49,29 @@ define(['require','angular','services/app-utils.module','angular-bootstrap'], fu
 				backdrop:'static',
 				size:'sm',
 				windowClass:"error-dlg",
+				resolve:{
+					'entity': function () {
+						return options;
+					}
+				}
+			})
+			modalInstance.result.then(function(){
+				deferred.resolve();
+			},function(){
+				deferred.reject("cancel");
+			});
+			
+			return deferred.promise;
+		}
+		
+		function showInfoDlg(options){
+			var $modal = $injector.get("$modal"),deferred = $q.defer();
+			var modalInstance = $modal.open({
+				templateUrl: cmpConfig.componentsPath + 'info-dialog.html',
+				controller: 'MessageDialogCtrl',
+				backdrop:'static',
+				size:'sm',
+				windowClass:"info-dlg",
 				resolve:{
 					'entity': function () {
 						return options;
