@@ -4,6 +4,7 @@ define(['require','angular','services/app-utils.module','angular-bootstrap'], fu
 			modalExist : modalExist,
 			closeAllModals : closeAllModals,
 			showConfirmDlg : showConfirmDlg,
+			showInfoDlg : showErrorDlg,
 			showErrorDlg : showErrorDlg
 		};
 		
