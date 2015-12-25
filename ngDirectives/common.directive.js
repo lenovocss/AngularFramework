@@ -161,20 +161,13 @@ define(["require","angular","directives/app-directives.module"], function(requir
 				},
 				link: function(scope, element, attributes, ngModel) {
 					
-					ngModel.$parsers.unshift(function(value) {
-						var valid = (scope.otherModelValue == value);
-						ngModel.$setValidity('confirmPassword', valid);
-						return valid ? value : undefined;
-					});
-
-					ngModel.$formatters.unshift(function(value) {
-						ngModel.$setValidity('confirmPassword', scope.otherModelValue == value);
-						return value;
-					});
+					ngModel.$validators.same = function(modelValue) {
+						return modelValue == scope.otherModelValue;
+					};
 		 
-					/*scope.$watch("otherModelValue", function() {
+					scope.$watch("otherModelValue", function() {
 						ngModel.$validate();
-					});*/
+					});
 				}
 			};
 	   })
