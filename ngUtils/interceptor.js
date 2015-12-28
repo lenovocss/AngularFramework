@@ -69,14 +69,14 @@ define(["require","angular"], function(require,ng) {
 	    return resourceInterceptor;
 	}]);
 
-	interceptor.factory('failureMsgInterceptor', ['$q','$location','modalUtils',function($q,$location,modalUtils) { 
+	interceptor.factory('failureMsgInterceptor', ['$q','$location','errorService',function($q,$location,errorService) { 
 	    var resourceInterceptor = {
 	        response: function(response) {
 	            //console.log("......response.....",response.config.url,response.status);
 				if(response &&  response.config.url.indexOf("login") == -1 
 					&& response.data && typeof response.data == "object" && !response.data.success){
 	            	//console.log("......response failure.....",response.data);
-					if(response.data.resultCode == "02802"){
+					if(response.data.resultCode == "02802" || response.data.resultCode == "00201"){
 						//alert("登陆超时，您需要重新登陆");
 						return response;
 					}
@@ -85,7 +85,7 @@ define(["require","angular"], function(require,ng) {
 						$location.path('/login');
 					}
 					else{
-						modalUtils.showErrorDlg({msg:response.data.resultMsg});
+						alert(response.data.resultMsg);
 					}
 	            	return $q.reject(response);
 	            }
