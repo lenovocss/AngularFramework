@@ -69,7 +69,7 @@ define(["require","angular"], function(require,ng) {
 	    return resourceInterceptor;
 	}]);
 
-	interceptor.factory('failureMsgInterceptor', ['$q','$location','errorService',function($q,$location,errorService) { 
+	interceptor.factory('failureMsgInterceptor', ['$q','$location','modalUtils',function($q,$location,modalUtils) { 
 	    var resourceInterceptor = {
 	        response: function(response) {
 	            //console.log("......response.....",response.config.url,response.status);
@@ -85,7 +85,7 @@ define(["require","angular"], function(require,ng) {
 						$location.path('/login');
 					}
 					else{
-						alert(response.data.resultMsg);
+						modalUtils.showErrorDlg({msg:response.data.resultMsg});
 					}
 	            	return $q.reject(response);
 	            }
