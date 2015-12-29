@@ -31,14 +31,28 @@ define(["require","angular"], function(require,ng) {
 
 	 
 	interceptor.factory('maskService', ['$rootScope','$q','$timeout',function($rootScope,$q,$timeout){
+		function execParseQS(url){
+            var tempa=null;
+            var reg=/([^=?&]+)=([^=?&]+)/g;
+            var resultObj={}
+            while( tempa=reg.exec(url)){
+                resultObj[tempa[1]]=tempa[2];         
+            }
+            
+            return resultObj;
+        }
+
 		var service = {
-			 showMask:function(config){  
-			 	if(/\/List.+/g.test(config.url)){
+			 showMask:function(config){ 
+			 	var qs =  execParseQS(config.url)||{};
+			 	if(/\/List.+/g.test(config.url)&&(!qs.notScreenLoading||qs.notScreenLoading=="no")){
 			 		$('#load-mask').removeClass("hide");
 			 	}   
 			 },
-			 hideMask:function(response){ 
-			 	if(/\/List.+/g.test(response.config.url)){
+			 hideMask:function(response){
+			 	var qs =  execParseQS(response.config.url)||{};
+			 	 
+			 	if(/\/List.+/g.test(response.config.url)&&(!qs.notScreenLoading||qs.notScreenLoading=="no")){
 			 		$timeout( function() { 
                             $('#load-mask').addClass("hide"); 
                     },200);
