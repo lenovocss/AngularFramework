@@ -1,7 +1,7 @@
 define(["require","angular","directives/app-directives.module"], function(require,ng,module) { 
 	var PAGE_COUNT_LIST = [{label:"10",value:10},{label:"20",value:20},{label:"50",value:50}]
 	
-	module.directive('gridPaging',['$window','domUtils','funcUtils',function($window,domUtils,funcUtils){
+	module.directive('gridPaging',['$window','$stateParams','domUtils','funcUtils',function($window,$stateParams,domUtils,funcUtils){
 	   	return { 
 	   		restrict:"AE",
 		   	replace:true,
@@ -14,7 +14,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 	 			showPaging:"@"
 	 		},
 	 		templateUrl : cmpConfig.directivesPath+"paging.html",
-		   	controller:["$scope","$element",function($scope, $element){
+		   	controller:["$scope","$element",'$stateParams',function($scope, $element,$stateParams){
 		   		var temp={};
 		   		$scope.pagingParam = $scope.pagingParam || {itemsDeletionCount:-1};
 
@@ -41,9 +41,22 @@ define(["require","angular","directives/app-directives.module"], function(requir
 			   		 }];
 		   		}
 
-		   		$scope.keyTypes = $scope.searchFilters;
-		   		$scope.value="";
-		   		$scope.keyType=$scope.keyTypes[0]; 
+		   		activate();
+				
+				function activate(){
+					$scope.keyTypes = $scope.searchFilters;
+					$scope.value="";
+					$scope.keyType=$scope.keyTypes[0]; 
+					
+					if(!$scope.pagingParam.selfDefineSearch){
+						for(var i=0;i<$scope.keyTypes.length;i++){
+							if($stateParams[$scope.keyTypes[i].key]){
+								$scope.keyType = $scope.keyTypes[i];
+								$scope.value = $stateParams[$scope.keyTypes[i].key];
+							}
+						}
+					}
+				}
 
 				var unwatchItemsCount = $scope.$watch('pagingParam.itemsCount', function(newValue, oldValue, scope) {
 					
