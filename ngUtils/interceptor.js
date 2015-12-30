@@ -12,7 +12,8 @@ define(["require","angular"], function(require,ng) {
 			}, 
 			unknownError:function(response){
 				if( (response.config.url.indexOf("/foam/service/proxy/servers/GetServer")==-1)
-				 && (response.config.url.indexOf("/foam/service/proxy/volumes/GetVolume")==-1) 
+				 && (response.config.url.indexOf("/foam/service/proxy/volumes/GetVolume")==-1)
+				 &&(response.config.url.indexOf("/foam/service/proxy/snapshots/GetSnapshot")==-1) 
 				 ){
 					var messages=this.getMessages(response.data.errors)
 					msgUtils.showError(messages.join(","),true);
