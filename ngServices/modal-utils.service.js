@@ -29,7 +29,7 @@ define(['require','angular','services/app-utils.module','angular-bootstrap'], fu
 				backdrop:'static',
 				resolve:{
 					params: function(){
-						return dlgParams.params;
+						return dlgParams.params || {};
 					}
 				},
 				size: dlgParams.size || "md",
