@@ -2,7 +2,7 @@
     <div class="wizard-body">
         <div class="wizard-bread" ng-if="">
             <ul class="nav nav-pills">
-                <li ng-repeat="step in steps" class="wizard-steps" ng-if="step.hd.name">
+                <li ng-repeat="step in steps" class="wizard-steps" ng-if="!step.hd.name">
                     <div id="talkbubble" ng-class="{'active':step.hd.active=='active','no-active':step.hd.active=='no-active','visited':maxVisited>=step.hd.index}" ng-click="clickStep(step.hd.index)">
                         <div class='title' ng-class="{'active':step.hd.active=='active'}">
                             {{step.hd.index+1}}.{{step.hd.name}}</div>
