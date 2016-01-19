@@ -17,6 +17,7 @@ define(['require','angular','services/app-utils.module'], function(require,ng,mo
                 "throttle":throttle,
                 "debounce":debounce,
 				"queryString":queryString,
+                "jsonToDataForm":jsonToDataForm,
                 "parseQS":parseQS,
                 "execParseQS":execParseQS,
 				"openDownloadPage":openDownloadPage
@@ -153,6 +154,14 @@ define(['require','angular','services/app-utils.module'], function(require,ng,mo
                     tempArr.push(attr+"="+data[attr]);
                 }
                 return "?" + tempArr.join("&"); 
+            }
+
+            function jsonToDataForm(json){
+                var tempArr = []; 
+                for (var attr in data){ 
+                    tempArr.push(attr+"="+data[attr]);
+                }
+                return tempArr.join("&"); 
             }
 
             function parseQS(url){
