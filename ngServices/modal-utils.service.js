@@ -5,7 +5,10 @@ define(['require','angular','services/app-utils.module','angular-bootstrap'], fu
 			closeAllModals : closeAllModals,
 			showConfirmDlg : showConfirmDlg,
 			showInfoDlg : showInfoDlg,
-			showErrorDlg : showErrorDlg
+			showErrorDlg : showErrorDlg,
+			showDlg : showDlg,
+			showSmallDlg : showSmallDlg,
+			showLargeDlg : showLargeDlg
 		};
 		
 		function modalExist(){
@@ -16,6 +19,39 @@ define(['require','angular','services/app-utils.module','angular-bootstrap'], fu
 		function closeAllModals(){
 			var $modalStack = $injector.get("$modalStack");
 			return !!$modalStack.getTop();
+		}
+		
+		function showDlg(dlgParams){
+			var $modal = $injector.get("$modal"),deferred = $q.defer();
+			var modalInstance=$modal.open({
+				templateUrl:dlgParams.tpl,
+				controller:dlgParams.ctrl,
+				backdrop:'static',
+				resolve:{
+					params: function(){
+						return dlgParams.params;
+					}
+				},
+				size: dlgParams.size || "md",
+				windowClass: dlgParams.windowClass || "",
+			});
+			modalInstance.result.then(function (result) {
+				deferred.resolve(result);
+			},function(reason){
+				deferred.reject(reason);
+			});
+			
+			return deferred.promise;
+		}
+		
+		function showSmallDlg(dlgParams){
+			dlgParams.size = "sm";
+			return showDlg(dlgParams);
+		}
+		
+		function showLargeDlg(dlgParams){
+			dlgParams.size = "lg";
+			return showDlg(dlgParams);
 		}
 		
 		function showConfirmDlg(options){
