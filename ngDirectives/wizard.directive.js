@@ -78,6 +78,9 @@ define(["require", "angular", "directives/app-directives.module","css!directives
 							me.successStepChange();
 					};
 					$scope.showPrev = function () {
+						if($scope.config.prevHide=="hide"){
+							return false;
+						}
 						if ($scope.selectedIndex == 0)
 							return false;
 						else
