@@ -62,7 +62,7 @@ define(["require","angular","directives/app-directives.module"], function(requir
 					
 					
 					newValue = newValue * 1;
-					if(newValue > 0){
+					if(newValue > 0 || (newValue ==0 && $scope.refreshForDeleting)){//delete the last item
 						_computePages(newValue);
 						setPageNav();
 						$scope.refreshForDeleting && $scope.navFun()();
