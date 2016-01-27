@@ -18,7 +18,7 @@ define(['require','angular','services/app-utils.module','angular-bootstrap'], fu
 		
 		function closeAllModals(){
 			var $modalStack = $injector.get("$modalStack");
-			return !!$modalStack.getTop();
+			return $modalStack.dismissAll();
 		}
 		
 		function showDlg(dlgParams){
