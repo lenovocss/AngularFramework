@@ -7,7 +7,8 @@ define(['require','angular','services/app-utils.module','components/index'], fun
 				"initTableSelect":initTableSelect,
 				"gridColumnsModal":gridColumnsModal,
 				"resetGridSelection":resetGridSelection,
-				"getSelectedProperties":getSelectedProperties
+				"getSelectedProperties":getSelectedProperties,
+				"createGridOptions":createGridOptions
 			};
 			
 			return funcs;
@@ -86,6 +87,19 @@ define(['require','angular','services/app-utils.module','components/index'], fun
 				}
 
 				return props;
+			}
+			
+			function createGridOptions(options){
+				if(options.columnDefs){
+					var cols = options.columnDefs;
+					for(var i=0;i<cols.length;i++){
+						if(!cols[i].minWidth){//add default min width,2 character
+							cols[i].minWidth = 40;
+						}
+					}
+				}
+				
+				return options;
 			}
         }
     ]);
