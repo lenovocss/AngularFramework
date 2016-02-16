@@ -595,5 +595,18 @@ define(["require","angular","directives/app-directives.module"], function(requir
 					});
 	    		}
 	    	}
-	    }]);
+	    }]).directive('gridEmptyTip',['$window',function($window){
+		   	return {
+				template:'<div class="no-rows" ng-show="!gridOptions.data.length"><div class="msg"><span>{{tip}}</span></div></div>',
+				replace: true,
+				scope:{
+					tip: "@",
+					gridOptions:"="
+				},
+		   		link:function(scope,el,attrs,ngModel){
+		   			
+					
+		   		}
+		   	}
+	   }]);
 });
