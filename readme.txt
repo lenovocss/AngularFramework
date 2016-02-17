@@ -1,1 +1,1 @@
-lenovocss front-end framework
+lenovocss front-end framework.
