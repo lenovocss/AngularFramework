@@ -365,9 +365,14 @@
 
 
 @-moz-document url-prefix() { /*FF*/
-  .ui-grid-icon-ok.ui-grid-row-selected:before {
-     top: 4px;
-  }
+	.ui-grid-icon-ok.ui-grid-row-selected:before {
+		top: 4px;
+	}
+  
+	.grid-seach-bar .grid-seach-input {
+		height: 30px;
+		padding-top: 7px;
+	}
 }
 
 @media screen and (min-width:0\0) and (min-resolution: +72dpi) {
@@ -375,6 +380,16 @@
   .ui-grid-icon-ok.ui-grid-row-selected:before {
      top: 4px;
   }
+  
+	.grid-seach-bar .grid-seach-input {
+		padding-top: 2.8px;
+	}
+	
+	.grid-seach-bar .grid-seach-input:focus {
+		padding-top: 2.8px;
+		padding-bottom:4px;
+		height:31px;
+	}
 }
 
 .ui-grid-icon-ok.ui-grid-all-selected:before{
