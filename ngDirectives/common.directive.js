@@ -595,43 +595,29 @@ define(["require","angular","directives/app-directives.module"], function(requir
 					});
 	    		}
 	    	}
-	    	}]).directive('gridEmptyTip',['$window',function($window){
-			   	return {
-					template:'<div class="no-rows" ng-show="!gridOptions.data.length"><div class="msg"><span>{{tip}}</span></div></div>',
-					replace: true,
-					scope:{
-						tip: "@",
-						gridOptions:"="
-					},
-			   		link:function(scope,el,attrs,ngModel){
-			   			
-						
-			   		}
-			   	}
-		   }]);
-	   //  }]).directive('gridEmptyTip',['$window',function($window){
-		  //  	return {
-				// template:'<div><div class="no-rows" ng-show="firstLoad && !init"><div class="msg"><span class="loading"></span><span>{{loadingTip}}</span></div></div><div class="no-rows" ng-show="init && gridOptions.data.length === 0"><div class="msg"><span>{{tip}}</span></div></div></div>',
-				// replace: true,
-				// scope:{
-				// 	tip: "@",
-				// 	loadingTip: "@",
-				// 	init: "=",
-				// 	gridOptions:"="
-				// },
-		  //  		link:function($scope,el,attrs,ngModel){
-				// 	$scope.loadingTip = $scope.loadingTip || "正在加载数据...";
+	    }]).directive('gridEmptyTip',['$window',function($window){
+			return {
+				template:'<div><div class="no-rows" ng-show="firstLoad && !init"><div class="msg"><span class="loading"></span><span>{{loadingTip}}</span></div></div><div class="no-rows" ng-show="init && gridOptions.data.length === 0"><div class="msg"><span>{{tip}}</span></div></div></div>',
+				replace: true,
+				scope:{
+					tip: "@",
+					loadingTip: "@",
+					init: "=",
+					gridOptions:"="
+				},
+				link:function($scope,el,attrs,ngModel){
+					$scope.loadingTip = $scope.loadingTip || "正在加载数据...";
 					
-		  //  			$scope.firstLoad = true;
+					$scope.firstLoad = true;
 					
-				// 	var watchListener = $scope.$watch('init',function(newVal,oldVal){
-				// 		newVal && ($scope.firstLoad = false);
-	   //  			})
+					var watchListener = $scope.$watch('init',function(newVal,oldVal){
+						newVal && ($scope.firstLoad = false);
+					})
 					
-				// 	$scope.$on("$destroy",function(){
-				// 		watchListener();
-				// 	});
-		  //  		}
-		  //  	}
-	   // }]);
+					$scope.$on("$destroy",function(){
+						watchListener();
+					});
+				}
+			}
+	    }]);
 });

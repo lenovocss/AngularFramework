@@ -479,12 +479,14 @@
 	}
 	
 	.no-rows .msg span.loading{
-		display:inline-block !important;
-		width:16px;
-		height:16px;
-		background:url("../img/process_loading.gif") no-repeat;
+		display: inline-block !important;
+		width: 16px;
+		height: 16px;
+		background: url("../img/process_loading.gif") no-repeat;
 		position: absolute;
-		top: 43px;
-		left: 220px;
+		top: 50%;
+		left: 50%;
+		margin-top: -8px;
+		margin-left: -110px;
 	}
 }
