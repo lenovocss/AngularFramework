@@ -57,15 +57,17 @@ define(["require", "angular", "directives/app-directives.module","css!directives
 						$scope.selectedIndex = index;
 					};
 					$scope.clickStep = function (index) {
-						if (me.isCompleted(index))
-							if ($scope.selectedIndex < index)
-								$scope.stepAction(index);
-							else {
-								me.exeIndex = index;
-								me.successStepChange();
+						if(!$scope.config.prohibitHeaderClick){
+							if (me.isCompleted(index))
+								if ($scope.selectedIndex < index)
+									$scope.stepAction(index);
+								else {
+									me.exeIndex = index;
+									me.successStepChange();
 
-								$scope.stepAction(index,"back_click");
-							}
+									$scope.stepAction(index,"back_click");
+								}
+						}
 					};
 					$scope.stepAction = function (index,mark) {
 						me.exeIndex = index;
