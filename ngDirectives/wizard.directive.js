@@ -38,7 +38,6 @@ define(["require", "angular", "directives/app-directives.module","css!directives
 					$scope.errors = [];
 					$scope.selectedItem = {};
 					$scope.$on('wizard-step-action', function(event,data) { 
-						// console.log('go to page', data); 
 						$scope.gotoStep(data,'next');      
 					});
 					$scope.gotoStep=function(index,mark){
@@ -184,7 +183,6 @@ define(["require", "angular", "directives/app-directives.module","css!directives
 						data : scope.onCompletedWizard()
 					});
 				}
-				console.log(scope.top);
 				element.find(".wizard-step-wrap").css({top:scope.top+"px",bottom:"0"});
 			}
 		};

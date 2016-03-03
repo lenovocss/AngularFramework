@@ -99,7 +99,6 @@ define(["require","angular","directives/app-directives.module"], function(requir
 					else{
 						$scope.canBeNext = true;
 					}
-					console.log("setPageNav");
 				}
 
 				$scope.previous = function(){

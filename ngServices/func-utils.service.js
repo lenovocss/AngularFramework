@@ -124,7 +124,6 @@ define(['require','angular','services/app-utils.module'], function(require,ng,mo
              * @returns {Function}     返回调用函数
              */
             function debounce(fn, delay, options) {
-                console.log(111);
                 var timeoutId;
                 if (!options) options = {};
                 var leadingExc = false;
