@@ -330,7 +330,7 @@
 	color: #f91;
 	cursor: pointer;
 }
-.ui-grid-header-cell>div:first-child{
+.ui-grid-pinned-container .ui-grid-header-cell>div:first-child{
 	position:absolute;
 	left:0;
 	right:0;
@@ -346,6 +346,7 @@
 	padding:0;
 	line-height:35px;
 }
+
 
 .ui-grid-cell-contents .ui-grid-icon-ok:before {
     content: '';
