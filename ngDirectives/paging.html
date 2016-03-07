@@ -3,7 +3,7 @@
 		<span class="grid-seach-label">筛选条件:</span>
 		<span>
 			<select  ng-change="resetSearch()" style="vertical-align:top;" ng-options="keyType.value for keyType in keyTypes" class="form-control grid-seach-select" ng-model="keyType" name="volume"> </select>
-			<input type="text" style="display:inline-block;width:152px;padding:0 15px;" name="value" class="form-control ng-pristine ng-untouched ng-valid" placeholder="值" ng-model="value" ng-keyup="search($event,keyType,value)" >
+			<input type="text" style="display:inline-block;width:152px;padding:0 15px;" name="value" class="form-control grid-seach-input" placeholder="值" ng-model="value" ng-keyup="search($event,keyType,value)" >
 		</span>
 	</div>
 	<div class="col-xs-8" style="padding-left:0;padding-right:0;max-width:574px;" ng-if="pagingParam.selfDefineSearch" ng-transclude>
